@@ -32,7 +32,34 @@ header = {'Authorization': f'Bearer {access_token['access_token']}'}
 response = requests.get(url, params=url_params, headers=header)
 print('Search Request Response: ' + str(response))
 
-print('Search Response Data:')
-print(response.json())
+info = response.json()
 
-# Minicourse 3 --> minute 34:31
+print('Number of total items: ' + str(info['albums']['total']))
+    # total = total number of items to return (NOT THE NUMBER OF ITEMS IT RETURNS)
+
+print('Number of items (return from the request): ' + str(info['albums']['limit']))
+    # limit = number of items it returns
+
+# With the album's id we can obtain information about it
+id_album = info['albums']['items'][0]['id']
+url = f'https://api.spotify.com/v1/albums/{id_album}'
+
+response = requests.get(url, params=url_params, headers=header)
+print('Get Album Request Response: ' + str(response))
+
+album = response.json()
+
+# Information on the response
+    # tracks = dictionary with all the information of the album tracks
+
+song_id = album['tracks']['items'][0]['id']
+
+# With the song id we can get its information
+url = f'https://api.spotify.com/v1/tracks/{song_id}'
+
+response = requests.get(url, params=url_params, headers=header)
+
+print('Get Track Request Response: ' + str(response))
+
+print('Track Information:')
+print(response.json())

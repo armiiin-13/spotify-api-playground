@@ -2,12 +2,12 @@ package com.spotify_api.search_web.model;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -18,12 +18,17 @@ public class Album {
 
     private String id;
     private String name;
-    private Artist artist;
     private int totalTracks;
     private String image;
 
-    @OneToMany(mappedBy="Track", cascade=CascadeType.ALL, orphanRemoval=true)
+    @ManyToOne
+    private Artist artist;
+
+    @OneToMany(mappedBy="album", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Track> tracks;
+
+    // Constructor
+    public Album(){}
 
     // Getters and Setters
     public String getId() {

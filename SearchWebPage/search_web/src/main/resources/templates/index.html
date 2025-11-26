@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spotify Seach Web</title>
+    </head>
+    <body>
+        <form action="/" method="get">
+            <label for="search">Search</label>
+            <input name="search" type="text" id="search" placeholder="Search...">
+            <button type="submit"></button>
+        </form>
+        {{#search}}
+            <h5>Last Search: {{search}}</h5>
+        {{/search}}
+        <h3>Artists:</h3>
+        <h3>Albums:</h3>
+        <h3>Tracks:</h3>
+    </body>
+</html>

@@ -16,6 +16,7 @@ public class Artist {
     private long internalId;
 
     private String id;
+    private String href;
     private String name;
     private String image;
     private int followers;
@@ -33,6 +34,14 @@ public class Artist {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getHref(){
+        return this.href;
+    }
+
+    public void setHref(String href){
+        this.href = href;
     }
 
     public String getName() {

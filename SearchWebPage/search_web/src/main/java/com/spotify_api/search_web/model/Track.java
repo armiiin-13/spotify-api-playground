@@ -1,5 +1,9 @@
 package com.spotify_api.search_web.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,6 +22,8 @@ public class Track {
     private String name;
     private int duration;
     private boolean explicit;
+
+    @JsonProperty("track_number")
     private int number;
 
     @ManyToOne
@@ -83,9 +89,9 @@ public class Track {
         this.album = album;
     }
 
-    public Artist getArtist(){
+    public List<Artist> getArtists(){
         if (album != null){
-            return album.getArtist();
+            return album.getArtists();
         }
         return null;
     }

@@ -9,11 +9,26 @@
             <input name="search" type="text" id="search" placeholder="Search...">
             <button type="submit"></button>
         </form>
-        {{#search}}
-            <h5>Last Search: {{search}}</h5>
-        {{/search}}
-        <h3>Artists:</h3>
-        <h3>Albums:</h3>
-        <h3>Tracks:</h3>
+
+        <div>
+            <h3>Artists:</h3>
+            {{#artists}}
+            <p>Name: {{name}}</p>
+            {{/artists}}
+        </div>
+
+        <div>
+            <h3>Albums:</h3>
+            {{#albums}}
+            <p>Name: {{name}}, Artist: {{#artists}}{{name}} {{/artists}}, Total Tracks: {{totalTracks}}</p>
+            {{/albums}}
+        </div>
+
+        <div>
+            <h3>Tracks:</h3>
+            {{#tracks}}
+            <p>Number Track: {{number}}, Name: {{name}}, Album: {{#album}}{{name}}{{/album}}, Artist: {{#album}}{{#artists}}{{name}} {{/artists}}{{/album}}</p>
+            {{/tracks}}
+        </div>
     </body>
 </html>

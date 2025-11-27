@@ -2,12 +2,14 @@ package com.spotify_api.search_web.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -19,11 +21,14 @@ public class Album {
     private String id;
     private String href;
     private String name;
-    private int totalTracks;
     private String image;
 
-    @ManyToOne
-    private Artist artist;
+    @JsonProperty("total_tracks")
+    private int totalTracks;
+    
+
+    @ManyToMany
+    private List<Artist> artists;
 
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<Track> tracks;
@@ -56,12 +61,12 @@ public class Album {
         this.name = name;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public List<Artist> getArtists() {
+        return artists;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 
     public int getTotalTracks() {

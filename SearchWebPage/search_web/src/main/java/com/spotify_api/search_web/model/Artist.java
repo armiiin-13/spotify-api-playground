@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Artist {
@@ -19,9 +19,8 @@ public class Artist {
     private String href;
     private String name;
     private String image;
-    private int followers;
 
-    @OneToMany(mappedBy="artist", cascade=CascadeType.ALL, orphanRemoval=true)
+    @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
     private List<Album> albums;
 
     // Constructor
@@ -58,14 +57,6 @@ public class Artist {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public int getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(int followers) {
-        this.followers = followers;
     }
 
     public List<Album> getAlbums() {

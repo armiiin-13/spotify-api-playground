@@ -15,12 +15,26 @@ public class SearchService {
     @Autowired
     private SpotifyService spotify;
 
+    @Autowired
+    private ArtistService artistService;
+
+    @Autowired
+    private AlbumService albumService;
+
+    @Autowired
+    private TrackService trackService;
+
     private String lastSearch;
     private SearchResponse lastResponse;
 
     private void getSearch(String search){
         this.lastSearch = search;
         this.lastResponse = spotify.getSearch(search);
+
+        // save all new data to the repositories
+        this.artistService.saveAll(this.lastResponse.getArtists().getItems());
+        this.albumService.saveAll(this.lastResponse.getAlbums().getItems());
+        this.trackService.saveAll(this.lastResponse.getTracks().getItems());
     }
 
     public Set<Artist> getArtistsFromSearch(String search){

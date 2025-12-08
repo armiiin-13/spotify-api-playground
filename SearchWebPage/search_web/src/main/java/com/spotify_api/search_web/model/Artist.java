@@ -1,5 +1,6 @@
 package com.spotify_api.search_web.model;
 
+
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;

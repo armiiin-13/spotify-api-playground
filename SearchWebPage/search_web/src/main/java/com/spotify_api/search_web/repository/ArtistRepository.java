@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spotify_api.search_web.model.Artist;
 
-public interface ArtistRepository extends JpaRepository<Artist, Long>{
+public interface ArtistRepository extends JpaRepository<Artist, String>{
     public Optional<Artist> findById(String id);
 }

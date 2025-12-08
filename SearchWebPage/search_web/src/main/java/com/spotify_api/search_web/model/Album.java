@@ -1,13 +1,11 @@
 package com.spotify_api.search_web.model;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -15,10 +13,8 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Album {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long internalId;
-
     private String id;
+
     private String href;
     private String name;
     private String image;
@@ -28,10 +24,10 @@ public class Album {
     
 
     @ManyToMany
-    private List<Artist> artists;
+    private Set<Artist> artists;
 
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL, orphanRemoval=true)
-    private List<Track> tracks;
+    private Set<Track> tracks;
 
     // Constructor
     public Album(){}
@@ -61,11 +57,11 @@ public class Album {
         this.name = name;
     }
 
-    public List<Artist> getArtists() {
+    public Set<Artist> getArtists() {
         return artists;
     }
 
-    public void setArtists(List<Artist> artists) {
+    public void setArtists(Set<Artist> artists) {
         this.artists = artists;
     }
 
@@ -85,11 +81,11 @@ public class Album {
         this.image = image;
     }
 
-    public List<Track> getTracks() {
+    public Set<Track> getTracks() {
         return tracks;
     }
 
-    public void setTracks(List<Track> tracks) {
+    public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
     }
 }

@@ -1,23 +1,20 @@
 package com.spotify_api.search_web.model;
 
-import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 
 @Entity
 public class Track {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long internalId;
-
     private String id;
+    
     private String href;
     private String name;
     private int duration;
@@ -28,6 +25,9 @@ public class Track {
 
     @ManyToOne
     private Album album;
+
+    @ManyToMany
+    private Set<Artist> artists;
 
     // Constructor
     public Track(){}
@@ -89,10 +89,11 @@ public class Track {
         this.album = album;
     }
 
-    public List<Artist> getArtists(){
-        if (album != null){
-            return album.getArtists();
-        }
-        return null;
+    public Set<Artist> getArtists(){
+        return this.artists;
+    }
+
+    public void setArtists(Set<Artist> artists){
+        this.artists = artists;
     }
 }

@@ -1,6 +1,6 @@
 package com.spotify_api.search_web.service;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,21 +23,21 @@ public class SearchService {
         this.lastResponse = spotify.getSearch(search);
     }
 
-    public List<Artist> getArtistsFromSearch(String search){
+    public Set<Artist> getArtistsFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }
         return lastResponse.getArtists().getItems();
     }
 
-    public List<Album> getAlbumsFromSearch(String search){
+    public Set<Album> getAlbumsFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }
         return lastResponse.getAlbums().getItems();
     }
 
-    public List<Track> getTracksFromSearch(String search){
+    public Set<Track> getTracksFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }

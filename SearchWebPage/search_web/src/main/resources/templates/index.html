@@ -27,7 +27,7 @@
         <div>
             <h3>Tracks:</h3>
             {{#tracks}}
-            <p>Number Track: {{number}}, Name: {{name}}, Album: {{#album}}{{name}}{{/album}}, Artist: {{#album}}{{#artists}}{{name}} {{/artists}}{{/album}}</p>
+            <p>Number Track: {{number}}, Name: {{name}}, Album: {{#album}}{{name}}{{/album}}, {{#artists}}Artist: {{name}} {{/artists}} </p>
             {{/tracks}}
         </div>
     </body>

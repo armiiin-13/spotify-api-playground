@@ -1,27 +1,23 @@
 package com.spotify_api.search_web.model;
 
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Artist {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long internalId;
-
     private String id;
+
     private String href;
     private String name;
     private String image;
 
     @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
-    private List<Album> albums;
+    private Set<Album> albums;
 
     // Constructor
     public Artist(){}
@@ -59,11 +55,23 @@ public class Artist {
         this.image = image;
     }
 
-    public List<Album> getAlbums() {
+    public Set<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(List<Album> albums) {
+    public void setAlbums(Set<Album> albums) {
         this.albums = albums;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o == null){
+            return false;
+        }
+        if (o instanceof Artist){
+            Artist other = (Artist) o;
+            return this.name.equals(other.getName());
+        }
+        return false;
     }
 }

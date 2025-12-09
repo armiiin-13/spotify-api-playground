@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.spotify_api.search_web.model.Album;
+import com.spotify_api.search_web.model.Track;
+import com.spotify_api.search_web.model.ItemsPage;
 import com.spotify_api.search_web.repository.AlbumRepository;
 
 @Component
@@ -16,7 +18,7 @@ public class AlbumService {
     private AlbumRepository repository;
 
     @Autowired
-    private ArtistService artistService;
+    private DatabaseService database;
 
     @Autowired
     private SpotifyService spotify;
@@ -25,18 +27,7 @@ public class AlbumService {
     private ImageService imageService;
 
     public void saveAll(List<Album> items) {
-        for (Album album: items){
-            this.save(album);
-        }
-    }
-
-    public void save(Album album) {
-        if (!(this.repository.existsById(album.getId()))){
-                this.artistService.saveAll(album.getArtists());
-                album = spotify.getAlbumByHref(album.getHref());
-                this.imageService.saveAll(album.getImages());
-                this.repository.save(album);
-            }
+        this.database.saveAllAlbums(items);
     }
 
     public List<Album> getAlbumsFromList(List<Album> albums){

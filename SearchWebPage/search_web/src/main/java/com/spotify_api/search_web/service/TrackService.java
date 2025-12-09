@@ -1,5 +1,6 @@
 package com.spotify_api.search_web.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,10 @@ public class TrackService {
     private TrackRepository repository;
 
     @Autowired
-    private AlbumService albumService;
+    private DatabaseService database;
 
-    @Autowired
-    private ArtistService artistService;
-
-    public void saveAll(List<Track> items) {
-        for (Track track: items){
-            if (!(this.repository.existsById(track.getId()))){
-                this.albumService.save(track.getAlbum());
-                this.artistService.saveAll(track.getArtists());
-                this.repository.save(track);
-            }
-        }
+    public void saveAll(List<Track> items){
+        this.database.saveAllTracks(items);
     }
+
 }

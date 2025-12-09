@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.spotify_api.search_web.model.Album;
 import com.spotify_api.search_web.model.Artist;
 import com.spotify_api.search_web.model.ItemsPage;
 import com.spotify_api.search_web.repository.ArtistRepository;
@@ -35,5 +36,29 @@ public class ArtistService {
             }
         }
         return list;
+    }
+
+    public Artist getArtist(String id){
+        Optional<Artist> op = this.repository.findById(id);
+        if (op.isEmpty()){
+            throw new RuntimeException("The artist should be in the database");
+        }
+        Artist artist = op.get();
+
+        // If the artist is not loaded, it should be (loaded = does not have associated albums)
+        if (!artist.isLoaded()){
+            return loadArtist(artist);
+        } // else
+        return artist;
+    }
+
+    private Artist loadArtist(Artist artist){
+        // Get artist's albums
+        ItemsPage<Album> albums = this.spotify.getArtistsAlbums(artist.getId());
+        this.database.saveAllAlbums(albums.getItems());
+        artist.setAlbums(albums.getItems());
+        artist.setLoaded(true);
+        this.database.modifyArtist(artist);
+        return artist;
     }
 }

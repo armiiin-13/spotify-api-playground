@@ -48,10 +48,10 @@ public class DatabaseService {
         }
     }
 
-    public void saveAlbum(Album item){ //complete album
+    public void saveAlbum(Album item){ 
         this.saveAllImages(item.getImages());
+        this.saveAllArtists(item.getArtists());
         this.albumRepository.save(item);
-        saveAllTracks(item.getTrackList());
     }
 
     public void saveAllAlbums(List<Album> items){
@@ -70,10 +70,19 @@ public class DatabaseService {
     }
 
     public void saveAllTracks(List<Track> items){
-        this.trackRepository.saveAll(items);
+        for (Track track: items){
+            if (!this.trackRepository.existsById(track.getId())){
+                this.saveTrack(track);
+            }
+        }
     }
 
     public void saveAllImages(List<Image> items){
         this.imageRepository.saveAll(items);
+    }
+
+    public void modifyArtist(Artist artist) { // complete artist (albums + tracks)
+        this.artistRepository.save(artist);
+        this.albumRepository.saveAll(artist.getAlbums());
     }
 }

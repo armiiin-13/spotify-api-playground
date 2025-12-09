@@ -17,7 +17,9 @@ public class Artist {
     private String href;
     private String name;
 
-    @OneToMany
+    private boolean loaded = false; //default
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Image> images;
 
     @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
@@ -65,6 +67,14 @@ public class Artist {
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
     }
 
     @Override

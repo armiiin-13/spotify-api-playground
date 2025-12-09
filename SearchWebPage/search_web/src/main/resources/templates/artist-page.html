@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spotify Search Web</title>
+    </head>
+    <body>
+        {{#artist}}
+            <p><strong>Name: </strong> {{name}}</p>
+            <p><strong>Albums: </strong></p>
+            {{#albums}}
+                <p>{{-index}}: {{name}} ({{totalTracks}})</p>
+            {{/albums}}
+        {{/artist}}
+        {{#image}}
+            <img src={{url}} width={{width}} height={{height}}>
+        {{/image}}
+    </body>
+</html>

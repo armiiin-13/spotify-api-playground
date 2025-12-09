@@ -23,7 +23,7 @@ public class Album {
     private String href;
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Image> images;
 
     @JsonProperty("total_tracks")
@@ -38,6 +38,8 @@ public class Album {
     @Transient
     @JsonProperty("tracks")
     private TrackWrapper trackWrapper;
+
+    private boolean loaded = false; // default
 
     // Constructor
     public Album(){}
@@ -99,6 +101,22 @@ public class Album {
         this.trackList = tracks;
     }
 
+    public TrackWrapper getTrackWrapper() {
+        return trackWrapper;
+    }
+
+    public void setTrackWrapper(TrackWrapper trackWrapper) {
+        this.trackWrapper = trackWrapper;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
+
     @PostLoad
     @PostPersist
     @PostUpdate
@@ -142,13 +160,5 @@ public class Album {
         public void setItems(List<Track> items) {
             this.items = items;
         }
-    }
-
-    public TrackWrapper getTrackWrapper() {
-        return trackWrapper;
-    }
-
-    public void setTrackWrapper(TrackWrapper trackWrapper) {
-        this.trackWrapper = trackWrapper;
     }
 }

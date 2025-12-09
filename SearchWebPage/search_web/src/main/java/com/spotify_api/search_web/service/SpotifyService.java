@@ -1,6 +1,7 @@
 package com.spotify_api.search_web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.spotify_api.search_web.model.Album;
 import com.spotify_api.search_web.model.Artist;
+import com.spotify_api.search_web.model.ItemsPage;
 import com.spotify_api.search_web.model.SearchResponse;
 import com.spotify_api.search_web.model.Track;
 
@@ -45,8 +47,8 @@ public class SpotifyService {
 
     public Artist getArtistById(String id) {
         // parameters
-        String completeUrl = ARTIST_URL + id;
-        return getArtistByHref(completeUrl);
+        String uri = ARTIST_URL + id;
+        return getArtistByHref(uri);
     }
 
     public Artist getArtistByHref(String href){
@@ -70,8 +72,8 @@ public class SpotifyService {
     }
 
     public Album getAlbumById(String id){
-        String completeUrl = ALBUM_URL + id;
-        return getAlbumByHref(completeUrl);
+        String uri = ALBUM_URL + id;
+        return getAlbumByHref(uri);
     }
 
     public Track getTrackByHref(String href) {
@@ -87,5 +89,27 @@ public class SpotifyService {
     public Track getTrackById(String id){
         String completeUrl = TRACK_URL + id;
         return getTrackByHref(completeUrl);
+    }
+
+    public ItemsPage<Album> getArtistsAlbums(String id){
+        String uri = ARTIST_URL + id + "/albums";
+
+        // parameters
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
+                .queryParam("id", id)
+                .queryParam("include_groups", "album,single");
+
+        // headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", tokenService.getTokenType() + " " + tokenService.getAccessToken());
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        ParameterizedTypeReference<ItemsPage<Album>> responseType = new ParameterizedTypeReference<ItemsPage<Album>>() {};
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType).getBody();
+    }
+
+    public ItemsPage<Track> getAlbumsTracks(String id) {
+        // TODO: Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAlbumsTracks'");
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Spotify Seach Web</title>
+        <title>Spotify Search Web</title>
     </head>
     <body>
         <form action="/" method="get">
@@ -13,7 +13,7 @@
         <div>
             <h3>Artists:</h3>
             {{#artists}}
-            <p>Name: {{name}}</p>
+            <a href="/artist/{{id}}">{{name}}</a> <br>
             {{/artists}}
         </div>
 

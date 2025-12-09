@@ -1,5 +1,7 @@
 package com.spotify_api.search_web.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +11,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PostPersist;
+import jakarta.persistence.PostUpdate;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Album {
@@ -17,17 +23,22 @@ public class Album {
 
     private String href;
     private String name;
-    private String image;
+
+    @OneToMany
+    private List<Image> images;
 
     @JsonProperty("total_tracks")
     private int totalTracks;
-    
 
     @ManyToMany
     private Set<Artist> artists;
 
-    @OneToMany(mappedBy="album", cascade=CascadeType.ALL, orphanRemoval=true)
-    private Set<Track> tracks;
+    @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
+    private List<Track> trackList;
+
+    @Transient
+    @JsonProperty("tracks")
+    private TrackWrapper trackWrapper;
 
     // Constructor
     public Album(){}
@@ -73,19 +84,72 @@ public class Album {
         this.totalTracks = totalTracks;
     }
 
-    public String getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
-    public Set<Track> getTracks() {
-        return tracks;
+    public List<Track> getTrackList() {
+        return trackList;
     }
 
-    public void setTracks(Set<Track> tracks) {
-        this.tracks = tracks;
+    public void setTrackList(List<Track> tracks) {
+        this.trackList = tracks;
+    }
+
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    private void resolveTracks() {
+        if (trackWrapper != null && trackWrapper.getItems() != null) {
+            trackList.clear();
+            for (Track t : trackWrapper.getItems()) {
+                t.setAlbum(this);
+                trackList.add(t);
+            }
+        }
+    }
+
+    private static class TrackWrapper{
+        private String href;
+        private int total;
+        private List<Track> items = new ArrayList<>();
+
+        public TrackWrapper(){}
+
+        public String getHref() {
+            return href;
+        }
+
+        public void setHref(String href) {
+            this.href = href;
+        }
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
+        public List<Track> getItems() {
+            return items;
+        }
+
+        public void setItems(List<Track> items) {
+            this.items = items;
+        }
+    }
+
+    public TrackWrapper getTrackWrapper() {
+        return trackWrapper;
+    }
+
+    public void setTrackWrapper(TrackWrapper trackWrapper) {
+        this.trackWrapper = trackWrapper;
     }
 }

@@ -21,6 +21,9 @@ public class AlbumService {
     @Autowired
     private SpotifyService spotify;
 
+    @Autowired
+    private ImageService imageService;
+
     public void saveAll(Set<Album> items) {
         for (Album album: items){
             this.save(album);
@@ -31,6 +34,7 @@ public class AlbumService {
         if (!(this.repository.existsById(album.getId()))){
                 this.artistService.saveAll(album.getArtists());
                 album = spotify.getAlbumByHref(album.getHref());
+                this.imageService.saveAll(album.getImages());
                 this.repository.save(album);
             }
     }

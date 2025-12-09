@@ -18,10 +18,14 @@ public class ArtistService {
     @Autowired
     private SpotifyService spotify;
 
+    @Autowired
+    private ImageService imageService;
+
     public void saveAll(Set<Artist> items) {
         for (Artist artist: items){
             if (!this.repository.existsById(artist.getId())){
                 artist = spotify.getArtistByHref(artist.getHref());
+                this.imageService.saveAll(artist.getImages());
                 this.repository.save(artist);
             }
         }

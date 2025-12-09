@@ -2,6 +2,7 @@ package com.spotify_api.search_web.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
@@ -17,13 +18,17 @@ public class Track {
     
     private String href;
     private String name;
+
+    @JsonProperty("duration_ms")
     private int duration;
+
     private boolean explicit;
 
     @JsonProperty("track_number")
     private int number;
 
     @ManyToOne
+    @JsonBackReference
     private Album album;
 
     @ManyToMany

@@ -35,6 +35,10 @@ public class SearchService {
         this.artistService.saveAll(this.lastResponse.getArtists().getItems());
         this.albumService.saveAll(this.lastResponse.getAlbums().getItems());
         this.trackService.saveAll(this.lastResponse.getTracks().getItems());
+
+        // convert the albums and artists sets with the whole information
+        this.lastResponse.getArtists().setItems(this.artistService.getArtistsFromSet(this.lastResponse.getArtists().getItems()));
+        this.lastResponse.getAlbums().setItems(this.albumService.getAlbumFromSet(this.lastResponse.getAlbums().getItems()));
     }
 
     public Set<Artist> getArtistsFromSearch(String search){

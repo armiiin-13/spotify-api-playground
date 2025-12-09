@@ -1,8 +1,8 @@
 package com.spotify_api.search_web.service;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class ArtistService {
     @Autowired
     private ImageService imageService;
 
-    public void saveAll(Set<Artist> items) {
+    public void saveAll(List<Artist> items) {
         for (Artist artist: items){
             if (!this.repository.existsById(artist.getId())){
                 artist = spotify.getArtistByHref(artist.getHref());
@@ -31,14 +31,14 @@ public class ArtistService {
         }
     }
 
-    public Set<Artist> getArtistsFromSet(Set<Artist> artists){
-        Set<Artist> set = new HashSet<>();
+    public List<Artist> getArtistsFromList(List<Artist> artists){
+        List<Artist> list = new ArrayList<>();
         for (Artist artist: artists){
             Optional<Artist> op = repository.findById(artist.getId()); 
             if (op.isPresent()){
-                set.add(op.get());
+                list.add(op.get());
             }
         }
-        return set;
+        return list;
     }
 }

@@ -1,13 +1,13 @@
 package com.spotify_api.search_web.model;
 
-import java.util.Set;
+import java.util.List;
 
 public class ItemsPage<T> {
     private String href;
     private int limit;
     private String next;
     private String previous;
-    private Set<T> items;
+    private List<T> items;
 
     // Getters and Setters
     public String getHref() {
@@ -42,11 +42,11 @@ public class ItemsPage<T> {
         this.previous = previous;
     }
 
-    public Set<T> getItems() {
+    public List<T> getItems() {
         return items;
     }
 
-    public void setItems(Set<T> items) {
+    public void setItems(List<T> items) {
         this.items = items;
     }
 }

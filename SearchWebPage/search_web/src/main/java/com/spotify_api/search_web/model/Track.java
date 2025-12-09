@@ -1,6 +1,6 @@
 package com.spotify_api.search_web.model;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,7 +32,7 @@ public class Track {
     private Album album;
 
     @ManyToMany
-    private Set<Artist> artists;
+    private List<Artist> artists;
 
     // Constructor
     public Track(){}
@@ -94,11 +94,11 @@ public class Track {
         this.album = album;
     }
 
-    public Set<Artist> getArtists(){
+    public List<Artist> getArtists(){
         return this.artists;
     }
 
-    public void setArtists(Set<Artist> artists){
+    public void setArtists(List<Artist> artists){
         this.artists = artists;
     }
 }

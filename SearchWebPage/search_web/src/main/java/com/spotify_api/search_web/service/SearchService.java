@@ -1,6 +1,6 @@
 package com.spotify_api.search_web.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,25 +37,25 @@ public class SearchService {
         this.trackService.saveAll(this.lastResponse.getTracks().getItems());
 
         // convert the albums and artists sets with the whole information
-        this.lastResponse.getArtists().setItems(this.artistService.getArtistsFromSet(this.lastResponse.getArtists().getItems()));
-        this.lastResponse.getAlbums().setItems(this.albumService.getAlbumFromSet(this.lastResponse.getAlbums().getItems()));
+        this.lastResponse.getArtists().setItems(this.artistService.getArtistsFromList(this.lastResponse.getArtists().getItems()));
+        this.lastResponse.getAlbums().setItems(this.albumService.getAlbumsFromList(this.lastResponse.getAlbums().getItems()));
     }
 
-    public Set<Artist> getArtistsFromSearch(String search){
+    public List<Artist> getArtistsFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }
         return lastResponse.getArtists().getItems();
     }
 
-    public Set<Album> getAlbumsFromSearch(String search){
+    public List<Album> getAlbumsFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }
         return lastResponse.getAlbums().getItems();
     }
 
-    public Set<Track> getTracksFromSearch(String search){
+    public List<Track> getTracksFromSearch(String search){
         if (!search.equals(lastSearch)){
             getSearch(search);
         }

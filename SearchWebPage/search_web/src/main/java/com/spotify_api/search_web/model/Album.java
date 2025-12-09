@@ -2,7 +2,6 @@ package com.spotify_api.search_web.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,7 +30,7 @@ public class Album {
     private int totalTracks;
 
     @ManyToMany
-    private Set<Artist> artists;
+    private List<Artist> artists;
 
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     private List<Track> trackList;
@@ -68,11 +67,11 @@ public class Album {
         this.name = name;
     }
 
-    public Set<Artist> getArtists() {
+    public List<Artist> getArtists() {
         return artists;
     }
 
-    public void setArtists(Set<Artist> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
 

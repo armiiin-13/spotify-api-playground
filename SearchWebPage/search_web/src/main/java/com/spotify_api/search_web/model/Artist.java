@@ -2,7 +2,6 @@ package com.spotify_api.search_web.model;
 
 
 import java.util.List;
-import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,7 +21,7 @@ public class Artist {
     private List<Image> images;
 
     @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
-    private Set<Album> albums;
+    private List<Album> albums;
 
     // Constructor
     public Artist(){}
@@ -60,11 +59,11 @@ public class Artist {
         this.images = images;
     }
 
-    public Set<Album> getAlbums() {
+    public List<Album> getAlbums() {
         return albums;
     }
 
-    public void setAlbums(Set<Album> albums) {
+    public void setAlbums(List<Album> albums) {
         this.albums = albums;
     }
 

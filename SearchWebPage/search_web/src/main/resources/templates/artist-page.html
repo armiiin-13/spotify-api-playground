@@ -10,6 +10,10 @@
             {{#albums}}
                 <p>{{-index}}: {{name}} ({{totalTracks}})</p>
             {{/albums}}
+            <p><strong>Top Tracks: </strong></p>
+            {{#topTracks}}
+                <p>{{-index}}: {{name}} ({{duration}} ms)</p>
+            {{/topTracks}}
         {{/artist}}
         {{#image}}
             <img src={{url}} width={{width}} height={{height}}>

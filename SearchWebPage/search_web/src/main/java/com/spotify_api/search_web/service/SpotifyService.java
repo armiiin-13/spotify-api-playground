@@ -14,6 +14,7 @@ import com.spotify_api.search_web.model.Artist;
 import com.spotify_api.search_web.model.ItemsPage;
 import com.spotify_api.search_web.model.SearchResponse;
 import com.spotify_api.search_web.model.Track;
+import com.spotify_api.search_web.model.TracksResponse;
 
 @Component
 public class SpotifyService {
@@ -32,9 +33,9 @@ public class SpotifyService {
     public SearchResponse getSearch(String search){
         // parameters
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(SEARCH_URL)
-                .queryParam("q", search)
-                .queryParam("type", "artist,album,track")
-                .queryParam("limit", 5);
+            .queryParam("q", search)
+            .queryParam("type", "artist,album,track")
+            .queryParam("limit", 5);
 
         // headers
         HttpHeaders headers = new HttpHeaders();
@@ -96,8 +97,8 @@ public class SpotifyService {
 
         // parameters
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
-                .queryParam("id", id)
-                .queryParam("include_groups", "album,single");
+            .queryParam("id", id)
+            .queryParam("include_groups", "album,single");
 
         // headers
         HttpHeaders headers = new HttpHeaders();
@@ -106,6 +107,21 @@ public class SpotifyService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         ParameterizedTypeReference<ItemsPage<Album>> responseType = new ParameterizedTypeReference<ItemsPage<Album>>() {};
         return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType).getBody();
+    }
+
+    public TracksResponse getArtistsTopTracks(String id) {
+        String uri = ARTIST_URL + id + "/top-tracks";
+
+        // parameters
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
+            .queryParam("id", id);
+
+        // headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", tokenService.getTokenType() + " " + tokenService.getAccessToken());
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, TracksResponse.class).getBody();
     }
 
     public ItemsPage<Track> getAlbumsTracks(String id) {

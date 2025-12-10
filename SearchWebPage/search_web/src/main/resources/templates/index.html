@@ -20,7 +20,7 @@
         <div>
             <h3>Albums:</h3>
             {{#albums}}
-            <p>Name: {{name}}, Artist: {{#artists}}{{name}} {{/artists}}, Total Tracks: {{totalTracks}}</p>
+            <p>Name: <a href="/album/{{id}}">{{name}}</a>, Artist: {{#artists}}{{name}} {{/artists}}, Total Tracks: {{totalTracks}}</p>
             {{/albums}}
         </div>
 

@@ -125,7 +125,19 @@ public class SpotifyService {
     }
 
     public ItemsPage<Track> getAlbumsTracks(String id) {
-        // TODO: Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAlbumsTracks'");
+        String uri = ALBUM_URL + id + "/tracks";
+
+        // parameters
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
+            .queryParam("id", id)
+            .queryParam("limit", 40);
+
+        // headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", tokenService.getTokenType() + " " + tokenService.getAccessToken());
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        ParameterizedTypeReference<ItemsPage<Track>> responseType = new ParameterizedTypeReference<ItemsPage<Track>>() {};
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType).getBody();
     }
 }

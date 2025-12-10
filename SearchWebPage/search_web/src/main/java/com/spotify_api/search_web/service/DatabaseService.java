@@ -10,10 +10,7 @@ import com.spotify_api.search_web.model.Album;
 import com.spotify_api.search_web.model.Artist;
 import com.spotify_api.search_web.model.Image;
 import com.spotify_api.search_web.model.Track;
-import com.spotify_api.search_web.repository.AlbumRepository;
-import com.spotify_api.search_web.repository.ArtistRepository;
 import com.spotify_api.search_web.repository.ImageRepository;
-import com.spotify_api.search_web.repository.TrackRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -25,16 +22,6 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class DatabaseService {
-
-    @Autowired
-    private ArtistRepository artistRepository;
-
-    @Autowired
-    private AlbumRepository albumRepository;
-
-    @Autowired
-    private TrackRepository trackRepository;
-
     @Autowired
     private ImageRepository imageRepository;
 
@@ -44,7 +31,7 @@ public class DatabaseService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    // ---------------------- ARTISTAS ----------------------
+    // ---------------------- ARTISTS ----------------------
     public Artist saveArtist(Artist artist) {
         saveAllImages(artist.getImages());
 
@@ -69,7 +56,7 @@ public class DatabaseService {
     public void saveAllArtists(List<Artist> artists) {
         if (artists == null)
             return;
-        List<Artist> copy = new ArrayList<>(artists); // <-- copia
+        List<Artist> copy = new ArrayList<>(artists); // <-- copy
         for (Artist artist : copy) {
             Artist managed = entityManager.find(Artist.class, artist.getId());
             if (managed == null) {
@@ -77,6 +64,11 @@ public class DatabaseService {
             }
             saveArtist(managed);
         }
+    }
+
+    public Artist modifyArtist(Artist artist) {
+        Artist managed = getManagedArtist(artist.getId(), artist);
+        return entityManager.merge(managed);
     }
 
     // ---------------------- ALBUMS ----------------------
@@ -103,7 +95,7 @@ public class DatabaseService {
     public void saveAllAlbums(List<Album> albums) {
         if (albums == null)
             return;
-        List<Album> copy = new ArrayList<>(albums); // <-- copia
+        List<Album> copy = new ArrayList<>(albums); // <-- copy
         for (Album album : copy) {
             Album managed = entityManager.find(Album.class, album.getId());
             if (managed == null) {
@@ -113,10 +105,22 @@ public class DatabaseService {
         }
     }
 
+    public Album modifyAlbum(Album album) {
+        Album managed = getManagedAlbum(album.getId(), album);
+        return entityManager.merge(managed);
+    }
+
     // ---------------------- TRACKS ----------------------
     public Track saveTrack(Track track) {
         saveAllArtists(track.getArtists());
         saveAlbum(track.getAlbum());
+
+        Track managed = getManagedTrack(track.getId(), track);
+        return entityManager.merge(managed);
+    }
+
+    public Track saveTrackSimplified(Track track) {
+        saveAllArtists(track.getArtists());
 
         Track managed = getManagedTrack(track.getId(), track);
         return entityManager.merge(managed);
@@ -138,7 +142,7 @@ public class DatabaseService {
     public void saveAllTracks(List<Track> tracks) {
         if (tracks == null)
             return;
-        List<Track> copy = new ArrayList<>(tracks); // <-- copia
+        List<Track> copy = new ArrayList<>(tracks); // <-- copy
         for (Track track : copy) {
             Track managed = entityManager.find(Track.class, track.getId());
             if (managed == null) {
@@ -149,16 +153,24 @@ public class DatabaseService {
         }
     }
 
+    public void saveAllTracksSimplified(List<Track> tracks) {
+        if (tracks == null)
+            return;
+        List<Track> copy = new ArrayList<>(tracks); // <-- copy
+        for (Track track : copy) {
+            Track managed = entityManager.find(Track.class, track.getId());
+            if (managed == null) {
+                saveTrackSimplified(track);
+            } else {
+                saveTrackSimplified(managed);
+            }
+        }
+    }
+
     // ---------------------- IMAGES ----------------------
     public void saveAllImages(List<Image> images) {
         if (images == null || images.isEmpty())
             return;
         imageRepository.saveAll(images);
-    }
-
-    // ---------------------- MODIFY ARTIST ----------------------
-    public Artist modifyArtist(Artist artist) {
-        Artist managed = getManagedArtist(artist.getId(), artist);
-        return entityManager.merge(managed);
     }
 }

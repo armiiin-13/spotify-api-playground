@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.spotify_api.search_web.model.Album;
+import com.spotify_api.search_web.model.ItemsPage;
+import com.spotify_api.search_web.model.Track;
 import com.spotify_api.search_web.repository.AlbumRepository;
 
 @Component
@@ -34,5 +36,30 @@ public class AlbumService {
             }
         }
         return list;
+    }
+
+    public Album getAlbum(String id) {
+        Optional<Album> op = this.repository.findById(id);
+        if (op.isEmpty()){
+            throw new RuntimeException("The album should be in the database");
+        }
+        Album album = op.get();
+
+        // If the album is not loaded, it should be (loaded = does not have associated albums)
+        if (!album.isLoaded()){
+            return loadAlbum(album);
+        } // else
+        return album;
+    }
+
+    private Album loadAlbum(Album album){
+        // get tracks from album
+        ItemsPage<Track> tracks = this.spotify.getAlbumsTracks(album.getId());
+        this.database.saveAllTracksSimplified(tracks.getItems());
+        album.setTrackList(tracks.getItems());
+        
+        album.setLoaded(true);
+        this.database.modifyAlbum(album);
+        return album;
     }
 }

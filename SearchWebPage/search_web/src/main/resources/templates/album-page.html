@@ -4,17 +4,14 @@
         <title>Spotify Search Web</title>
     </head>
     <body>
-        {{#artist}}
+        {{#album}}
             <p><strong>Name: </strong> {{name}}</p>
-            <p><strong>Albums: </strong></p>
-            {{#albums}}
-                <p>{{-index}}: <a href="/album/{{id}}">{{name}}</a> ({{totalTracks}})</p>
-            {{/albums}}
-            <p><strong>Top Tracks: </strong></p>
-            {{#topTracks}}
+            <p><strong>Total Tracks: </strong>{{totalTracks}}</p>
+            <p><strong>Tracks: </strong></p>
+            {{#trackList}}
                 <p>{{-index}}: {{name}} ({{duration}} ms)</p>
-            {{/topTracks}}
-        {{/artist}}
+            {{/trackList}}
+        {{/album}}
         {{#image}}
             <img src={{url}} width={{width}} height={{height}}>
         {{/image}}

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.spotify_api.search_web.model.Album;
 import com.spotify_api.search_web.model.Artist;
 import com.spotify_api.search_web.model.ItemsPage;
-import com.spotify_api.search_web.model.Track;
 import com.spotify_api.search_web.model.TracksResponse;
 import com.spotify_api.search_web.repository.ArtistRepository;
 
@@ -55,25 +54,18 @@ public class ArtistService {
     }
 
     private Artist loadArtist(Artist artist){
-        artist.setAlbums(loadAlbums(artist.getId()));
-        artist.setTopTracks(loadTopTracks(artist.getId()));
+        // get artist's albums
+        ItemsPage<Album> albums = this.spotify.getArtistsAlbums(artist.getId());
+        this.database.saveAllAlbums(albums.getItems());
+        artist.setAlbums(albums.getItems());
+        
+        // get artist's top tracks
+        TracksResponse tracks = this.spotify.getArtistsTopTracks(artist.getId());
+        this.database.saveAllTracks(tracks.getTracks());
+        artist.setTopTracks(tracks.getTracks());
         
         artist.setLoaded(true);
         this.database.modifyArtist(artist);
         return artist;
-    }
-
-    private List<Album> loadAlbums(String id){
-        // get artist's albums
-        ItemsPage<Album> albums = this.spotify.getArtistsAlbums(id);
-        this.database.saveAllAlbums(albums.getItems());
-        return albums.getItems();
-    }  
-    
-    private List<Track> loadTopTracks(String id){
-        // get artist's top tracks
-        TracksResponse tracks = this.spotify.getArtistsTopTracks(id);
-        this.database.saveAllTracks(tracks.getTracks());
-        return tracks.getTracks();
     }
 }

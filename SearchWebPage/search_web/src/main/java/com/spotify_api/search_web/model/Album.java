@@ -135,20 +135,25 @@ public class Album {
         private int total;
         private List<Track> items = new ArrayList<>();
 
+        @SuppressWarnings("unused")
         public TrackWrapper(){}
 
+        @SuppressWarnings("unused")
         public String getHref() {
             return href;
         }
 
+        @SuppressWarnings("unused")
         public void setHref(String href) {
             this.href = href;
         }
 
+        @SuppressWarnings("unused")
         public int getTotal() {
             return total;
         }
 
+        @SuppressWarnings("unused")
         public void setTotal(int total) {
             this.total = total;
         }
@@ -157,6 +162,7 @@ public class Album {
             return items;
         }
 
+        @SuppressWarnings("unused")
         public void setItems(List<Track> items) {
             this.items = items;
         }

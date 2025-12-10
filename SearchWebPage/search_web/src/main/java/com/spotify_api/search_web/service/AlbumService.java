@@ -21,9 +21,6 @@ public class AlbumService {
     @Autowired
     private SpotifyService spotify;
 
-    @Autowired
-    private ImageService imageService;
-
     public void saveAll(List<Album> items) {
         this.database.saveAllAlbums(items);
     }

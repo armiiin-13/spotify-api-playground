@@ -1,9 +1,10 @@
 package com.spotify_api.search_web.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.spotify_api.search_web.model.Album;
 import com.spotify_api.search_web.model.Artist;
@@ -14,11 +15,17 @@ import com.spotify_api.search_web.repository.ArtistRepository;
 import com.spotify_api.search_web.repository.ImageRepository;
 import com.spotify_api.search_web.repository.TrackRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
 /*
     This service is defined to make all save, modify and remove operations for all repositories
 */
-@Component
+@Service
+@Transactional
 public class DatabaseService {
+
     @Autowired
     private ArtistRepository artistRepository;
 
@@ -31,58 +38,127 @@ public class DatabaseService {
     @Autowired
     private ImageRepository imageRepository;
 
-    @Autowired // try to find a way to not include this service in this class
+    @Autowired
     private SpotifyService spotify;
 
-    public void saveArtist(Artist item){ //complete artist
-        this.saveAllImages(item.getImages());
-        this.artistRepository.save(item);
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    // ---------------------- ARTISTAS ----------------------
+    public Artist saveArtist(Artist artist) {
+        saveAllImages(artist.getImages());
+
+        Artist managed = getManagedArtist(artist.getId(), artist);
+        return entityManager.merge(managed);
     }
 
-    public void saveAllArtists(List<Artist> items){
-        for (Artist artist: items){
-            if (!this.artistRepository.existsById(artist.getId())){
-                artist = spotify.getArtistByHref(artist.getHref());
-                saveArtist(artist);
+    private Artist getManagedArtist(String artistId, Artist artistFromSpotify) {
+        Artist managed = entityManager.find(Artist.class, artistId);
+        if (managed != null) {
+            // copy
+            managed.setName(artistFromSpotify.getName());
+            managed.setImages(artistFromSpotify.getImages());
+            managed.setAlbums(artistFromSpotify.getAlbums());
+            managed.setTopTracks(artistFromSpotify.getTopTracks());
+            managed.setLoaded(artistFromSpotify.isLoaded());
+            return managed;
+        }
+        return artistFromSpotify;
+    }
+
+    public void saveAllArtists(List<Artist> artists) {
+        if (artists == null)
+            return;
+        List<Artist> copy = new ArrayList<>(artists); // <-- copia
+        for (Artist artist : copy) {
+            Artist managed = entityManager.find(Artist.class, artist.getId());
+            if (managed == null) {
+                managed = spotify.getArtistByHref(artist.getHref());
+            }
+            saveArtist(managed);
+        }
+    }
+
+    // ---------------------- ALBUMS ----------------------
+    public Album saveAlbum(Album album) {
+        saveAllImages(album.getImages());
+        saveAllArtists(album.getArtists());
+
+        Album managed = getManagedAlbum(album.getId(), album);
+        return entityManager.merge(managed);
+    }
+
+    private Album getManagedAlbum(String albumId, Album albumFromSpotify) {
+        Album managed = entityManager.find(Album.class, albumId);
+        if (managed != null) {
+            //copy
+            managed.setName(albumFromSpotify.getName());
+            managed.setImages(albumFromSpotify.getImages());
+            managed.setArtists(albumFromSpotify.getArtists());
+            return managed;
+        }
+        return albumFromSpotify;
+    }
+
+    public void saveAllAlbums(List<Album> albums) {
+        if (albums == null)
+            return;
+        List<Album> copy = new ArrayList<>(albums); // <-- copia
+        for (Album album : copy) {
+            Album managed = entityManager.find(Album.class, album.getId());
+            if (managed == null) {
+                managed = spotify.getAlbumByHref(album.getHref());
+            }
+            saveAlbum(managed);
+        }
+    }
+
+    // ---------------------- TRACKS ----------------------
+    public Track saveTrack(Track track) {
+        saveAllArtists(track.getArtists());
+        saveAlbum(track.getAlbum());
+
+        Track managed = getManagedTrack(track.getId(), track);
+        return entityManager.merge(managed);
+    }
+
+    private Track getManagedTrack(String trackId, Track trackFromSpotify) {
+        Track managed = entityManager.find(Track.class, trackId);
+        if (managed != null) {
+            // copy
+            managed.setName(trackFromSpotify.getName());
+            managed.setArtists(trackFromSpotify.getArtists());
+            managed.setAlbum(trackFromSpotify.getAlbum());
+            managed.setDuration(trackFromSpotify.getDuration());
+            return managed;
+        }
+        return trackFromSpotify;
+    }
+
+    public void saveAllTracks(List<Track> tracks) {
+        if (tracks == null)
+            return;
+        List<Track> copy = new ArrayList<>(tracks); // <-- copia
+        for (Track track : copy) {
+            Track managed = entityManager.find(Track.class, track.getId());
+            if (managed == null) {
+                saveTrack(track);
+            } else {
+                saveTrack(managed);
             }
         }
     }
 
-    public void saveAlbum(Album item){ 
-        this.saveAllImages(item.getImages());
-        this.saveAllArtists(item.getArtists());
-        this.albumRepository.save(item);
+    // ---------------------- IMAGES ----------------------
+    public void saveAllImages(List<Image> images) {
+        if (images == null || images.isEmpty())
+            return;
+        imageRepository.saveAll(images);
     }
 
-    public void saveAllAlbums(List<Album> items){
-        for (Album album: items){
-            if (!this.albumRepository.existsById(album.getId())){
-                album = spotify.getAlbumByHref(album.getHref());
-                saveAlbum(album);   
-            }
-        }
-    }
-
-    public void saveTrack(Track item){
-        this.saveAllArtists(item.getArtists());
-        this.saveAlbum(item.getAlbum());
-        this.trackRepository.save(item);
-    }
-
-    public void saveAllTracks(List<Track> items){
-        for (Track track: items){
-            if (!this.trackRepository.existsById(track.getId())){
-                this.saveTrack(track);
-            }
-        }
-    }
-
-    public void saveAllImages(List<Image> items){
-        this.imageRepository.saveAll(items);
-    }
-
-    public void modifyArtist(Artist artist) { // complete artist (albums + tracks)
-        this.artistRepository.save(artist);
-        this.albumRepository.saveAll(artist.getAlbums());
+    // ---------------------- MODIFY ARTIST ----------------------
+    public Artist modifyArtist(Artist artist) {
+        Artist managed = getManagedArtist(artist.getId(), artist);
+        return entityManager.merge(managed);
     }
 }

@@ -1,4 +1,4 @@
-package com.spotify_api.search_web.model;
+package com.spotify_api.search_web.model.apiResponse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

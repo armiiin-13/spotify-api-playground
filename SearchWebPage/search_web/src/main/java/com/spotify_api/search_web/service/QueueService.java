@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.spotify_api.search_web.model.Track;
-import com.spotify_api.search_web.model.TrackQueue;
+import com.spotify_api.search_web.model.dataStructure.TrackQueue;
+import com.spotify_api.search_web.model.entity.Track;
 import com.spotify_api.search_web.repository.TrackRepository;
 
 @Component

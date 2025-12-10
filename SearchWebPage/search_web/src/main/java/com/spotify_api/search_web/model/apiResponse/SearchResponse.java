@@ -1,4 +1,8 @@
-package com.spotify_api.search_web.model;
+package com.spotify_api.search_web.model.apiResponse;
+
+import com.spotify_api.search_web.model.entity.Album;
+import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.entity.Track;
 
 public class SearchResponse {
     private ItemsPage<Artist> artists;

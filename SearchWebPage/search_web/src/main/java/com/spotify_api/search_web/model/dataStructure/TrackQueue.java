@@ -1,7 +1,9 @@
-package com.spotify_api.search_web.model;
+package com.spotify_api.search_web.model.dataStructure;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.spotify_api.search_web.model.entity.Track;
 
 public class TrackQueue {
     private List<String> queue;

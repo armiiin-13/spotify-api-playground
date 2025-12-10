@@ -11,7 +11,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.spotify_api.search_web.model.TokenResponse;
+import com.spotify_api.search_web.model.apiResponse.TokenResponse;
 
 @Component
 public class TokenService {

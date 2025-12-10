@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spotify_api.search_web.model.Album;
-import com.spotify_api.search_web.model.Artist;
-import com.spotify_api.search_web.model.Image;
-import com.spotify_api.search_web.model.Track;
+import com.spotify_api.search_web.model.entity.Album;
+import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.entity.Image;
+import com.spotify_api.search_web.model.entity.Track;
 import com.spotify_api.search_web.repository.ImageRepository;
 
 import jakarta.persistence.EntityManager;

@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.spotify_api.search_web.model.Album;
-import com.spotify_api.search_web.model.Artist;
-import com.spotify_api.search_web.model.ItemsPage;
-import com.spotify_api.search_web.model.TracksResponse;
+import com.spotify_api.search_web.model.apiResponse.ItemsPage;
+import com.spotify_api.search_web.model.apiResponse.TracksResponse;
+import com.spotify_api.search_web.model.entity.Album;
+import com.spotify_api.search_web.model.entity.Artist;
 import com.spotify_api.search_web.repository.ArtistRepository;
 
 @Component

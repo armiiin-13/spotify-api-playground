@@ -1,6 +1,8 @@
-package com.spotify_api.search_web.model;
+package com.spotify_api.search_web.model.apiResponse;
 
 import java.util.List;
+
+import com.spotify_api.search_web.model.entity.Track;
 
 public class TracksResponse {
     private List<Track> tracks;

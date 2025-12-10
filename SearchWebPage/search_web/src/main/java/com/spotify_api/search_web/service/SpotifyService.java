@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.spotify_api.search_web.model.Album;
-import com.spotify_api.search_web.model.Artist;
-import com.spotify_api.search_web.model.ItemsPage;
-import com.spotify_api.search_web.model.SearchResponse;
-import com.spotify_api.search_web.model.Track;
-import com.spotify_api.search_web.model.TracksResponse;
+import com.spotify_api.search_web.model.apiResponse.ItemsPage;
+import com.spotify_api.search_web.model.apiResponse.SearchResponse;
+import com.spotify_api.search_web.model.apiResponse.TracksResponse;
+import com.spotify_api.search_web.model.entity.Album;
+import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.entity.Track;
 
 @Component
 public class SpotifyService {

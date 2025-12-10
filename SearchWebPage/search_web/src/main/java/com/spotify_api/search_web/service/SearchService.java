@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.spotify_api.search_web.model.Album;
-import com.spotify_api.search_web.model.Artist;
-import com.spotify_api.search_web.model.SearchResponse;
-import com.spotify_api.search_web.model.Track;
+import com.spotify_api.search_web.model.apiResponse.SearchResponse;
+import com.spotify_api.search_web.model.entity.Album;
+import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.entity.Track;
 
 @Component
 public class SearchService {

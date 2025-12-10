@@ -25,6 +25,9 @@ public class Artist {
     @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
     private List<Album> albums;
 
+    @ManyToMany(cascade=CascadeType.ALL)
+    private List<Album> singles;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Track> topTracks;
 
@@ -86,6 +89,14 @@ public class Artist {
 
     public void setTopTracks(List<Track> topTracks) {
         this.topTracks = topTracks;
+    }
+
+    public List<Album> getSingles() {
+        return singles;
+    }
+
+    public void setSingles(List<Album> singles) {
+        this.singles = singles;
     }
 
     @Override

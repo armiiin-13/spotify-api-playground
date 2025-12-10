@@ -58,6 +58,11 @@ public class ArtistService {
         ItemsPage<Album> albums = this.spotify.getArtistsAlbums(artist.getId());
         this.database.saveAllAlbums(albums.getItems());
         artist.setAlbums(albums.getItems());
+
+        // get artist's singles
+        ItemsPage<Album> singles = this.spotify.getArtistsSingles(artist.getId());
+        this.database.saveAllAlbums(singles.getItems());
+        artist.setSingles(singles.getItems());
         
         // get artist's top tracks
         TracksResponse tracks = this.spotify.getArtistsTopTracks(artist.getId());

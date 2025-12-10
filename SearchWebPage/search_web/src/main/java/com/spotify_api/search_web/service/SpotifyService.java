@@ -98,7 +98,24 @@ public class SpotifyService {
         // parameters
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
             .queryParam("id", id)
-            .queryParam("include_groups", "album,single");
+            .queryParam("include_groups", "album");
+
+        // headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", tokenService.getTokenType() + " " + tokenService.getAccessToken());
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        ParameterizedTypeReference<ItemsPage<Album>> responseType = new ParameterizedTypeReference<ItemsPage<Album>>() {};
+        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, responseType).getBody();
+    }
+
+    public ItemsPage<Album> getArtistsSingles(String id) {
+        String uri = ARTIST_URL + id + "/albums";
+
+        // parameters
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
+            .queryParam("id", id)
+            .queryParam("include_groups", "single");
 
         // headers
         HttpHeaders headers = new HttpHeaders();

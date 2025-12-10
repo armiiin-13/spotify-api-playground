@@ -10,6 +10,10 @@
             {{#albums}}
                 <p>{{-index}}: <a href="/album/{{id}}">{{name}}</a> ({{totalTracks}})</p>
             {{/albums}}
+            <p><strong>Singles: </strong></p>
+            {{#singles}}
+                <p>{{-index}}: <a href="/album/{{id}}">{{name}}</a> ({{totalTracks}})</p>
+            {{/singles}}
             <p><strong>Top Tracks: </strong></p>
             {{#topTracks}}
                 <p>{{-index}}: {{name}} ({{duration}} ms)</p>

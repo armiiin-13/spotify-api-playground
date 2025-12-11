@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostUpdate;
@@ -23,8 +24,8 @@ public class Album {
     private String href;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Image> images;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image image;
 
     @JsonProperty("total_tracks")
     private int totalTracks;
@@ -85,28 +86,20 @@ public class Album {
         this.totalTracks = totalTracks;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
     public List<Track> getTrackList() {
         return trackList;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public void setTrackList(List<Track> tracks) {
         this.trackList = tracks;
-    }
-
-    public TrackWrapper getTrackWrapper() {
-        return trackWrapper;
-    }
-
-    public void setTrackWrapper(TrackWrapper trackWrapper) {
-        this.trackWrapper = trackWrapper;
     }
 
     public boolean isLoaded() {
@@ -115,6 +108,13 @@ public class Album {
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
+    }
+
+    @JsonProperty("images")
+    private void stablishImage(List<Image> images) {
+        if (images != null && !images.isEmpty()) {
+            this.image = images.getFirst();
+        }
     }
 
     @PostLoad

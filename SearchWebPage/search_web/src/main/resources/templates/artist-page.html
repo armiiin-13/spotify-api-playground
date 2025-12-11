@@ -16,11 +16,11 @@
             {{/singles}}
             <p><strong>Top Tracks: </strong></p>
             {{#topTracks}}
-                <p>{{-index}}: <a href="/queue/{{id}}">{{name}}</a> ({{duration}} ms)</p>
+                <p>{{-index}}: <a href="/queue/{{id}}">{{name}}</a> ({{duration}} minutes)</p>
             {{/topTracks}}
+            {{#image}}
+                <img src={{url}} width={{width}} height={{height}}>
+            {{/image}}
         {{/artist}}
-        {{#image}}
-            <img src={{url}} width={{width}} height={{height}}>
-        {{/image}}
     </body>
 </html>

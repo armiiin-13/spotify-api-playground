@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
-
 @Entity
 public class Track {
     @Id
@@ -19,8 +18,7 @@ public class Track {
     private String href;
     private String name;
 
-    @JsonProperty("duration_ms")
-    private int duration;
+    private String duration;
 
     private boolean explicit;
 
@@ -62,14 +60,6 @@ public class Track {
         this.name = name;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     public boolean isExplicit() {
         return explicit;
     }
@@ -100,5 +90,21 @@ public class Track {
 
     public void setArtists(List<Artist> artists){
         this.artists = artists;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    @JsonProperty("duration_ms")
+    public void setDurationMS(int durationMS) {
+        if (durationMS != 0) {
+            float minutes = durationMS / 60000f;
+            this.duration = String.format("%.2f", minutes);
+        }
     }
 }

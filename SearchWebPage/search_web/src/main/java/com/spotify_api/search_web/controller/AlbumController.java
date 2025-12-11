@@ -18,7 +18,6 @@ public class AlbumController {
     public String getSearch(Model model, @PathVariable String id) {
         Album album = this.albumService.getAlbum(id);
         model.addAttribute("album", album);
-        model.addAttribute("image", album.getImages().getFirst());
         return "album-page";
     }
 }

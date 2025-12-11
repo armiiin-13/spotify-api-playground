@@ -9,11 +9,12 @@
             <p><strong>Total Tracks: </strong>{{totalTracks}}</p>
             <p><strong>Tracks: </strong></p>
             {{#trackList}}
-                <p>{{-index}}: <a href="/queue/{{id}}">{{name}}</a> ({{duration}} ms)</p>
+                <p>{{-index}}: <a href="/queue/{{id}}">{{name}}</a> ({{duration}} minutes)</p>
             {{/trackList}}
+            {{#image}}
+                <img src={{url}} width={{width}} height={{height}}>
+            {{/image}}
         {{/album}}
-        {{#image}}
-            <img src={{url}} width={{width}} height={{height}}>
-        {{/image}}
+        
     </body>
 </html>

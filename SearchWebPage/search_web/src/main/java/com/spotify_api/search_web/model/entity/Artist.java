@@ -3,11 +3,13 @@ package com.spotify_api.search_web.model.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Artist {
@@ -19,8 +21,8 @@ public class Artist {
 
     private boolean loaded = false; //default
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Image> images;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image image;
 
     @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
     private List<Album> albums;
@@ -59,12 +61,12 @@ public class Artist {
         this.name = name;
     }
 
-    public List<Image> getImages() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public List<Album> getAlbums() {
@@ -109,5 +111,12 @@ public class Artist {
             return this.name.equals(other.getName());
         }
         return false;
+    }
+
+    @JsonProperty("images")
+    private void stablishImage(List<Image> images) {
+        if (images != null && !images.isEmpty()) {
+            this.image = images.getFirst();
+        }
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.spotify_api.search_web.model.entity.Album;
 import com.spotify_api.search_web.model.entity.Artist;
-import com.spotify_api.search_web.model.entity.Image;
 import com.spotify_api.search_web.model.entity.Track;
 import com.spotify_api.search_web.repository.ImageRepository;
 
@@ -33,8 +32,6 @@ public class DatabaseService {
 
     // ---------------------- ARTISTS ----------------------
     public Artist saveArtist(Artist artist) {
-        saveAllImages(artist.getImages());
-
         Artist managed = getManagedArtist(artist.getId(), artist);
         return entityManager.merge(managed);
     }
@@ -44,7 +41,7 @@ public class DatabaseService {
         if (managed != null) {
             // copy
             managed.setName(artistFromSpotify.getName());
-            managed.setImages(artistFromSpotify.getImages());
+            managed.setImage(artistFromSpotify.getImage());
             managed.setAlbums(artistFromSpotify.getAlbums());
             managed.setTopTracks(artistFromSpotify.getTopTracks());
             managed.setLoaded(artistFromSpotify.isLoaded());
@@ -73,7 +70,6 @@ public class DatabaseService {
 
     // ---------------------- ALBUMS ----------------------
     public Album saveAlbum(Album album) {
-        saveAllImages(album.getImages());
         saveAllArtists(album.getArtists());
 
         Album managed = getManagedAlbum(album.getId(), album);
@@ -85,7 +81,7 @@ public class DatabaseService {
         if (managed != null) {
             //copy
             managed.setName(albumFromSpotify.getName());
-            managed.setImages(albumFromSpotify.getImages());
+            managed.setImage(albumFromSpotify.getImage());
             managed.setArtists(albumFromSpotify.getArtists());
             return managed;
         }
@@ -165,12 +161,5 @@ public class DatabaseService {
                 saveTrackSimplified(managed);
             }
         }
-    }
-
-    // ---------------------- IMAGES ----------------------
-    public void saveAllImages(List<Image> images) {
-        if (images == null || images.isEmpty())
-            return;
-        imageRepository.saveAll(images);
     }
 }

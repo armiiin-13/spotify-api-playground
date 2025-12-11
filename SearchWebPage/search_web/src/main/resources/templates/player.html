@@ -6,7 +6,7 @@
     <body>
         <p><strong>Now Playing</strong></p>
         {{#track}}
-                <p>{{name}} ({{duration}} ms)</p>
+                <p>{{name}} ({{duration}} minutes)</p>
         {{/track}}
         <form action="/queue/next" method="get">
             <button type="submit">Next</button>

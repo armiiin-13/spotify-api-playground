@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 import com.spotify_api.search_web.model.dataStructure.TrackQueue;
 import com.spotify_api.search_web.model.entity.Track;
-import com.spotify_api.search_web.repository.TrackRepository;
+import com.spotify_api.search_web.model.exception.TrackNotFoundException;
 
 @Component
 public class QueueService {
     @Autowired
-    private TrackRepository repository;
+    private TrackService trackService;
 
     private TrackQueue queue;
 
@@ -25,11 +25,16 @@ public class QueueService {
     }
 
     public Track dequeue(){
-        String spotifyId = this.queue.dequeue();
-        Optional<Track> op = repository.findById(spotifyId);
-        if (op.isPresent()){
-            return op.get();
+        if (this.queue.isEmpty()){
+            return null;
+        } else {
+            String spotifyId = this.queue.dequeue();
+            Optional<Track> op = trackService.findTrack(spotifyId);
+            if (op.isPresent()){
+                return op.get();
+            } // else
+            throw new TrackNotFoundException();
         }
-        throw new RuntimeException("Not found on repository");
+    
     }
 }

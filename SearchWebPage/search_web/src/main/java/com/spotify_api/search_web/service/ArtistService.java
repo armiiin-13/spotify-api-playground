@@ -11,6 +11,7 @@ import com.spotify_api.search_web.model.apiResponse.ItemsPage;
 import com.spotify_api.search_web.model.apiResponse.TracksResponse;
 import com.spotify_api.search_web.model.entity.Album;
 import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.exception.ArtistNotFoundException;
 import com.spotify_api.search_web.repository.ArtistRepository;
 
 @Component
@@ -42,7 +43,7 @@ public class ArtistService {
     public Artist getArtist(String id){
         Optional<Artist> op = this.repository.findById(id);
         if (op.isEmpty()){
-            throw new RuntimeException("The artist should be in the database");
+            throw new ArtistNotFoundException();
         }
         Artist artist = op.get();
 

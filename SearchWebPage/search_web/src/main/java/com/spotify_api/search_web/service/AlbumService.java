@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.spotify_api.search_web.model.apiResponse.ItemsPage;
 import com.spotify_api.search_web.model.entity.Album;
 import com.spotify_api.search_web.model.entity.Track;
+import com.spotify_api.search_web.model.exception.AlbumNotFoundException;
 import com.spotify_api.search_web.repository.AlbumRepository;
 
 @Component
@@ -41,7 +42,7 @@ public class AlbumService {
     public Album getAlbum(String id) {
         Optional<Album> op = this.repository.findById(id);
         if (op.isEmpty()){
-            throw new RuntimeException("The album should be in the database");
+            throw new AlbumNotFoundException();
         }
         Album album = op.get();
 

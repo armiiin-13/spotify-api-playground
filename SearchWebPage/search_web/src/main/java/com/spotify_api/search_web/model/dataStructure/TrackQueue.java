@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spotify_api.search_web.model.entity.Track;
+import com.spotify_api.search_web.model.exception.EmptyQueueException;
 
 public class TrackQueue {
     private List<String> queue;
@@ -24,7 +25,7 @@ public class TrackQueue {
 
     public String dequeue(){
         if (this.queue.isEmpty()){
-            return null;
+            throw new EmptyQueueException();
         }
         return this.queue.removeFirst();
     }

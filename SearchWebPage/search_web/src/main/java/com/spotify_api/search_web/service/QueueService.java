@@ -15,9 +15,11 @@ public class QueueService {
     private TrackService trackService;
 
     private TrackQueue queue;
+    private Track nowPlaying;
 
     public QueueService(){
         this.queue = new TrackQueue();
+        this.nowPlaying = null;
     }
 
     public void addTrack(String id){
@@ -36,5 +38,10 @@ public class QueueService {
             throw new TrackNotFoundException();
         }
     
+    }
+
+    public Object nowPlaying() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nowPlaying'");
     }
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spotify Queue</title>
+    </head>
+    <body>
+        <p><strong>Now Playing</strong></p>
+        {{#track}}
+                <p>{{name}} ({{duration}} ms)</p>
+        {{/track}}
+        <form action="/queue/next" method="get">
+            <button type="submit">Next</button>
+        </form>
+    </body>
+</html>

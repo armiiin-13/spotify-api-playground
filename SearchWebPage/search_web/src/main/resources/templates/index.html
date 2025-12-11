@@ -27,7 +27,7 @@
         <div>
             <h3>Tracks:</h3>
             {{#tracks}}
-            <p>Number Track: {{number}}, Name: {{name}}, Album: {{#album}}{{name}}{{/album}}, {{#artists}}Artist: {{name}} {{/artists}} </p>
+            <p>Number Track: {{number}}, Name: <a href="/queue/{{id}}">{{name}}</a>, Album: {{#album}}{{name}}{{/album}}, {{#artists}}Artist: {{name}} {{/artists}} </p>
             {{/tracks}}
         </div>
     </body>

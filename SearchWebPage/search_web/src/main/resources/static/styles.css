@@ -1,0 +1,203 @@
+/*----- BACKGROUND -----*/
+.page{
+    /*layout*/
+    position: relative;
+    height: 100vh;
+
+    /*style*/
+    background: url("/images/background.png") lightgray 50% / cover no-repeat;
+}
+
+/*----- ENTITY BUTTONS -----*/
+.entity-button {
+    /*layout*/
+    display: flex;
+    width: 198px;
+    height: 68px;
+    padding: 12.75px 31px 12.75px 27.123px;
+    justify-content: center;
+    align-items: center;
+    gap: 16.26px;
+
+    /*style*/
+    border-radius: 20px;
+    border: 1px solid rgba(29, 185, 84, 0.30);
+    background: #0B201A;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.12) inset, 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button-text {
+    color: rgba(255, 255, 255, 0.90);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+}
+
+.entity-button:hover {
+    cursor: pointer;
+
+    /*style*/
+    border-radius: 20px;
+    border: 1px solid rgba(29, 185, 84, 0.45);
+    background: #0F2B23;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.12) inset, 0 4px 4px 0 rgba(0, 0, 0, 0.20);
+}
+
+.buttons-row{
+    /*layout*/        
+    display: flex;
+    justify-content: center;    
+    gap: 150px;                  
+    width: 100%;
+
+    /*position*/
+    position: relative;
+    top: 82px;
+    left: 90px;
+}
+
+.entity-icon{
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+}
+
+
+/*----- SEARCH BAR -----*/
+.search-container {
+    /*layout*/
+    width: 967px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    /*position*/
+    position: relative;
+    top: 50px;
+    left: 334px;
+
+    /*style*/
+    border-radius: 999px;
+    border: 3px solid rgba(27, 138, 65, 0.30);
+    background: #0B201A;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+.search-text {
+    /*layout*/
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: none;
+    background: transparent;
+    padding: 0 28px;
+    text-align: left;
+
+    /*style*/
+    color: rgba(255, 255, 255, 0.90);
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+}
+
+.search-text::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+.search-button {
+    /*layout*/
+    width: 127px;
+    height: 100%;
+    border: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+
+    /*style*/
+    background: rgba(23, 74, 41, 0.50);
+}
+
+.search-button:hover {
+    filter: brightness(1.08);
+}
+
+.search-button:active {
+    filter: brightness(0.98);
+}
+
+/*----- MODE BUTTONS -----*/
+.mode-button{
+    /*layout*/
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+
+    /*style*/
+    border-radius: 75px;
+    border: 1px solid rgba(29, 185, 84, 0.30);
+    background: #0B201A;
+    box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.15) inset;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.15));
+}
+
+.mode-button:hover{
+    /*style*/
+    border-radius: 75px;
+    border: 1px solid rgba(29, 185, 84, 0.40);
+    background: #0F2B23;
+    box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.15) inset;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.15));
+}
+
+.mode-buttons-container{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 50; 
+
+    /*position*/
+    position: absolute;
+    top: 60px;
+    left: 190px;
+}
+
+/*----- CONTENT PANEL -----*/
+.content-panel{
+    /*layout*/
+    display: flex;
+    width: 1160px;
+    height: 491px;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    /*position*/
+    position: relative;
+    top: 90px;
+    left: 140px;
+
+    /*style*/
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(16, 55, 40, 0.70);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(7.5px);
+}
+
+/*----- LOGO -----*/
+.logo-container{
+    /*position*/
+    position: relative;
+    top: 60px;
+    left: 1130px
+}

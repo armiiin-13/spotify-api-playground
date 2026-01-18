@@ -1,4 +1,4 @@
-package com.spotify_api.search_web.controller;
+package com.spotify_api.search_web.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

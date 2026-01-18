@@ -1,4 +1,4 @@
-package com.spotify_api.search_web.controller;
+package com.spotify_api.search_web.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,14 +11,8 @@ import com.spotify_api.search_web.service.QueueService;
 
 @Controller
 public class QueueController {
-    @Autowired 
+    @Autowired
     private QueueService queue;
-
-    @GetMapping("/queue/{id}")
-    public String queue(Model model, @PathVariable String id) {
-        queue.addTrack(id);
-        return "redirect:/";
-    } 
 
     @GetMapping("/queue")
     public String showPlayer(Model model) {

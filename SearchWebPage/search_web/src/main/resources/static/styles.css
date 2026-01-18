@@ -260,6 +260,12 @@
     gap: 40px;
 }
 
+.display-column{
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
 /*----- LOGO -----*/
 .logo-container{
     /*position*/

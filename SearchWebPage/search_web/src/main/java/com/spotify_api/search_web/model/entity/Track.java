@@ -1,5 +1,6 @@
 package com.spotify_api.search_web.model.entity;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,6 +32,8 @@ public class Track {
 
     @ManyToMany
     private List<Artist> artists;
+
+    private String artistString;
 
     // Constructor
     public Track(){}
@@ -100,11 +103,33 @@ public class Track {
         this.duration = duration;
     }
 
+    public String getArtistString() {
+        return artistString;
+    }
+
+    public void setArtistString(String artistString) {
+        this.artistString = artistString;
+    }
+
     @JsonProperty("duration_ms")
     public void setDurationMS(int durationMS) {
         if (durationMS != 0) {
             float minutes = durationMS / 60000f;
             this.duration = String.format("%.2f", minutes);
         }
+    }
+
+    @JsonProperty("artists")
+    private void stablishArtists(List<Artist> listArtist){
+        this.artists = listArtist;
+        StringBuilder s = new StringBuilder();
+        Iterator<Artist> it = this.artists.iterator();
+        while (it.hasNext()){
+            s.append(it.next().getName());
+            if (it.hasNext()){
+                s.append(", ");
+            }
+        }
+        this.artistString = s.toString();
     }
 }

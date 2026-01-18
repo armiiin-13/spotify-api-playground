@@ -144,3 +144,124 @@
     line-height: 22px;
     letter-spacing: -0.43px;
 }
+
+/*----- TRACK CARD -----*/
+.card-container-track{
+    /*layout*/
+    display: flex;
+    width: 900px;
+    height: 90px;
+    padding: 14px 16px;
+    align-items: center;
+    gap: 10px;
+
+    /*style*/
+    border-radius: 22px;
+    border: 2px solid transparent;
+    background:
+    linear-gradient(#061A12, #061A12) padding-box,
+    conic-gradient(
+      from 180deg,
+      #1DB954,
+      #00F5D4,
+      #1DB954
+    ) border-box;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.info-container-track{
+    /*layout*/
+    display: flex;
+    width: 600px;
+    height: 92px;
+    padding: 5px 2px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.track-title{
+    /*layout*/
+    width: 600px;
+    height: 22px;
+    flex-shrink: 0;
+    margin: 2px;
+
+    /*typography*/
+    color: #FFF;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.track-info{
+    /*layout*/
+    width: 600px;
+    margin: 2px;
+
+    /*typography*/
+    color: rgba(255, 255, 255, 0.75);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.add-button{
+    /*layout*/
+    display: flex;
+    width: 166px;
+    height: 50px;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+
+    /*style*/
+    border-radius: 22px;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#082317, #082317) padding-box,
+        conic-gradient(
+            from 180deg,
+            #0E3A2A,
+            #14513A,
+            #1A6A4A
+        ) border-box;
+
+    cursor: pointer;
+}
+
+.add-button-text{
+    /*layout*/
+    margin-left: 4px;
+
+    /*typography*/
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.add-button:hover{
+    /*style*/
+    border-width: 3px;
+    background:
+        linear-gradient(#082317, #082317) padding-box,
+        conic-gradient(
+        from 180deg,
+        #1DB954,
+        #00F5D4,
+        #2D6BFF,
+        #FF4ECD,
+        #1DB954
+        ) border-box;
+}

@@ -3,6 +3,7 @@
     <head>
         <title>Spotify Search Web</title>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="display.css">
     </head>
     <body class="page">
         <form action="/" method="get">
@@ -66,15 +67,9 @@
         </div>
 
         <div class="content-panel">
-            {{#artists}}
-                <a href="/artist/{{id}}">{{name}}</a> <br>
-            {{/artists}}
-            {{#albums}}
-                <p>Name: <a href="/album/{{id}}">{{name}}</a>, Artist: {{#artists}}{{name}} {{/artists}}, Total Tracks: {{totalTracks}}</p>
-            {{/albums}}
-            {{#tracks}}
-                <p>Number Track: {{number}}, Name: <a href="/queue/{{id}}">{{name}}</a>, Album: {{#album}}{{name}}{{/album}}, {{#artists}}Artist: {{name}} {{/artists}} </p>
-            {{/tracks}}
+            <div class="display-wrapped">
+                {{> album-display}}
+            </div>
         </div>
 
         <footer class="logo-container">

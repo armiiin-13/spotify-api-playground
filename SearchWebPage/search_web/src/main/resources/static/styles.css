@@ -167,16 +167,16 @@
     /*position*/
     position: absolute;
     top: 60px;
-    left: 190px;
+    left: 210px;
 }
 
 /*----- CONTENT PANEL -----*/
 .content-panel{
     /*layout*/
     display: flex;
-    width: 1160px;
+    width: 970px;
     height: 491px;
-    padding: 10px;
+    padding: 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
@@ -184,7 +184,7 @@
     /*position*/
     position: relative;
     top: 90px;
-    left: 140px;
+    left: 260px;
 
     /*style*/
     border-radius: 24px;
@@ -192,6 +192,56 @@
     background: rgba(16, 55, 40, 0.70);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(7.5px);
+}
+
+.display-wrapped{
+    max-height: 491px;         
+    overflow-y: auto;          
+    overflow-x: hidden;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 26px;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,245,212,0.55) transparent;
+}
+
+/* Chrome/Edge/Safari */
+.display-wrapper::-webkit-scrollbar{
+    width: 10px;
+}
+
+.display-wrapper::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+.display-wrapper::-webkit-scrollbar-thumb{
+    background: linear-gradient(
+        180deg,
+        rgba(29,185,84,0.65),
+        rgba(0,245,212,0.65)
+    );
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+.display-wrapper::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(
+        180deg,
+        rgba(29,185,84,0.95),
+        rgba(0,245,212,0.95)
+    );
+    background-clip: padding-box;
+}
+
+.display-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
 }
 
 /*----- LOGO -----*/

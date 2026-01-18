@@ -1,0 +1,15 @@
+<div class="display-grid">
+    {{#artists}}
+    <form action="/artist/{{id}}" method="get">
+        <button class="card-container">
+            {{#image}}
+                <img src={{url}} class="image">
+            {{/image}}
+            {{^image}}
+                <img src="/images/image_not_found.jpg" class="image">
+            {{/image}}
+            <p class="artist-text text-ellipsis">{{name}}</p>
+        </button>
+    </form>
+    {{/artists}}
+</div>

@@ -1,6 +1,7 @@
 package com.spotify_api.search_web.model.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +33,8 @@ public class Album {
 
     @ManyToMany
     private List<Artist> artists;
+
+    private String artistString;
 
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     private List<Track> trackList;
@@ -110,11 +113,33 @@ public class Album {
         this.loaded = loaded;
     }
 
+    public String getArtistString() {
+        return artistString;
+    }
+
+    public void setArtistString(String artistString) {
+        this.artistString = artistString;
+    }
+
     @JsonProperty("images")
     private void stablishImage(List<Image> images) {
         if (images != null && !images.isEmpty()) {
             this.image = images.getFirst();
         }
+    }
+
+    @JsonProperty("artists")
+    private void stablishArtists(List<Artist> listArtist){
+        this.artists = listArtist;
+        StringBuilder s = new StringBuilder();
+        Iterator<Artist> it = this.artists.iterator();
+        while (it.hasNext()){
+            s.append(it.next().getName());
+            if (it.hasNext()){
+                s.append(", ");
+            }
+        }
+        this.artistString = s.toString();
     }
 
     @PostLoad

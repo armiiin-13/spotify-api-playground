@@ -116,7 +116,7 @@ public class Artist {
     @JsonProperty("images")
     private void stablishImage(List<Image> images) {
         if (images != null && !images.isEmpty()) {
-            this.image = images.getFirst();
+            this.image = images.getLast();
         }
     }
 }

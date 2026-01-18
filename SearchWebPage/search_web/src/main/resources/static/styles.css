@@ -3,6 +3,7 @@
     /*layout*/
     position: relative;
     height: 100vh;
+    overflow: hidden;
 
     /*style*/
     background: url("/images/background.png") lightgray 50% / cover no-repeat;
@@ -69,7 +70,7 @@
 
     /*position*/
     position: relative;
-    top: 82px;
+    top: 40px;
     left: 90px;
 }
 
@@ -91,7 +92,7 @@
 
     /*position*/
     position: relative;
-    top: 50px;
+    top: 25px;
     left: 334px;
 
     /*style*/
@@ -178,7 +179,7 @@
 
     /*position*/
     position: absolute;
-    top: 60px;
+    top: 35px;
     left: 210px;
 }
 
@@ -187,7 +188,7 @@
     /*layout*/
     display: flex;
     width: 970px;
-    height: 491px;
+    height: 400px;
     padding: 20px;
     flex-direction: column;
     align-items: flex-start;
@@ -195,7 +196,7 @@
 
     /*position*/
     position: relative;
-    top: 90px;
+    top: 60px;
     left: 260px;
 
     /*style*/
@@ -270,6 +271,6 @@
 .logo-container{
     /*position*/
     position: relative;
-    top: 60px;
+    top: 15px;
     left: 1130px
 }

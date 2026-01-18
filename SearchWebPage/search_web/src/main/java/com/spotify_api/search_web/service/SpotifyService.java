@@ -30,12 +30,16 @@ public class SpotifyService {
     private static final String ALBUM_URL = "https://api.spotify.com/v1/albums/"; // + id
     private static final String TRACK_URL = "https://api.spotify.com/v1/tracks/"; // + id
 
+    // CONSTANTS
+    private static final int SEARCH_LIMIT = 10;
+    private static final int TRACKS_LIMIT = 40;
+
     public SearchResponse getSearch(String search){
         // parameters
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(SEARCH_URL)
             .queryParam("q", search)
             .queryParam("type", "artist,album,track")
-            .queryParam("limit", 5);
+            .queryParam("limit", SEARCH_LIMIT);
 
         // headers
         HttpHeaders headers = new HttpHeaders();
@@ -147,7 +151,7 @@ public class SpotifyService {
         // parameters
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(uri)
             .queryParam("id", id)
-            .queryParam("limit", 40);
+            .queryParam("limit", TRACKS_LIMIT);
 
         // headers
         HttpHeaders headers = new HttpHeaders();

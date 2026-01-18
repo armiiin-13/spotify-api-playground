@@ -44,6 +44,7 @@ public class Album {
     private TrackWrapper trackWrapper;
 
     private boolean loaded = false; // default
+    private int releaseYear;
 
     // Constructor
     public Album(){}
@@ -121,6 +122,14 @@ public class Album {
         this.artistString = artistString;
     }
 
+    public int getYear() {
+        return releaseYear;
+    }
+
+    public void setYear(int year) {
+        this.releaseYear = year;
+    }
+
     @JsonProperty("images")
     private void stablishImage(List<Image> images) {
         if (images != null && !images.isEmpty()) {
@@ -140,6 +149,13 @@ public class Album {
             }
         }
         this.artistString = s.toString();
+    }
+
+    @JsonProperty("release_date")
+    private void stablishYear(String releaseDate){
+        if (releaseDate != null && !releaseDate.isBlank()){
+            this.releaseYear = Integer.parseInt(releaseDate.substring(0, 4));
+        }
     }
 
     @PostLoad

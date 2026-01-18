@@ -211,10 +211,6 @@
     max-height: 491px;         
     overflow-y: auto;          
     overflow-x: hidden;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
     border-radius: 26px;
 
     /* Firefox */
@@ -249,6 +245,20 @@
         rgba(0,245,212,0.95)
     );
     background-clip: padding-box;
+}
+
+.display-wrapped.simple {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.display-wrapped.double {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 60px;
 }
 
 .hidden{

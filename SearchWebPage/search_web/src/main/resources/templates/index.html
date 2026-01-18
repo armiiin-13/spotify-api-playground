@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Spotify Search Web</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="display.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/display.css">
     </head>
     <body class="page">
         <form action="/" method="get">
@@ -61,19 +61,19 @@
         </div>
 
         <div class="content-panel">
-            <div class="display-wrapped">
-                <div id="panel-artist">
-                    {{> /partials/artist-display}}
-                </div>
-                <div id="panel-album" hidden>
-                    {{> /partials/album-display}}
-                </div>
-                <div id="panel-track" hidden>
-                    {{> /partials/track-display}}
-                </div> 
+            <div class="display-wrapped double" id="panel-artist">
+                {{> /partials/artist-display}}
+            </div>
+
+            <div class="display-wrapped double" id="panel-album" hidden>
+                {{> /partials/album-display}}
+            </div>
+
+            <div class="display-wrapped simple" id="panel-track" hidden>
+                {{> /partials/track-display}}
             </div>
         </div>
-        <script src="main.js"></script>
+        <script src="/js/main.js"></script>
 
         <footer class="logo-container">
             <img src="images/logo_Spotify.png">

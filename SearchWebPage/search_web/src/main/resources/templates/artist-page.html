@@ -2,25 +2,61 @@
 <html>
     <head>
         <title>Spotify Search Web</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/artist-page.css">
+        <link rel="stylesheet" href="/css/display.css">
     </head>
-    <body>
-        {{#artist}}
-            <p><strong>Name: </strong> {{name}}</p>
-            <p><strong>Albums: </strong></p>
-            {{#albums}}
-                <p>{{-index}}: <a href="/album/{{id}}">{{name}}</a> ({{totalTracks}})</p>
-            {{/albums}}
-            <p><strong>Singles: </strong></p>
-            {{#singles}}
-                <p>{{-index}}: <a href="/album/{{id}}">{{name}}</a> ({{totalTracks}})</p>
-            {{/singles}}
-            <p><strong>Top Tracks: </strong></p>
-            {{#topTracks}}
-                <p>{{-index}}: <a href="/queue/{{id}}">{{name}}</a> ({{duration}} minutes)</p>
-            {{/topTracks}}
-            {{#image}}
-                <img src={{url}} width={{width}} height={{height}}>
-            {{/image}}
-        {{/artist}}
+    <body class="page" data-artist-id="{{#artist}}{{id}}{{/artist}}">
+        <div class="layout">
+            <p class="artist-name">{{#artist}}{{name}}{{/artist}}</p>
+
+            <div class="horizontal-upper-frame">
+                <div class="mode-frame">
+                    {{> /partials/mode-buttons}}
+                </div>
+
+                <div class="content-frame">
+                    {{#artist}}{{#image}}
+                        <img src={{url}} class="image">
+                    {{/image}}
+                    {{^image}}
+                        <img src="/images/image_not_found.jpg" class="image">
+                    {{/image}}{{/artist}}
+                    
+                    <div class="right-frame">
+                        <div class="horizontal-frame">
+                            <button class="mode-button" data-mode="albums" id="mode-albums" type="button">ALBUMS</button>
+                            <button class="mode-button" data-mode="eps" id="mode-eps" type="button">EPs</button>
+                            <button class="mode-button" data-mode="singles" id="mode-singles" type="button">SINGLES</button>
+                        </div>
+
+                        <div class="horizontal-frame">
+                            <button class="rotative-button" id="rotate-left" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                                    <path d="M6 11L1 6L6 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="horizontal-frame" id="album-pager">
+                                {{> /partials/album-display-2}}
+                            </div>
+                            <button class="rotative-button" id="rotate-right" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                                    <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="horizontal-sub-frame">
+                <p class="info-text">most popular tracks<span class="invisible-text">.....</span></p>
+                <div class="content-panel">
+                    <div class="display-wrapped simple" id="panel-track" hidden>
+                        {{> /partials/track-display}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

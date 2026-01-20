@@ -70,7 +70,7 @@
     margin: 1px;
 }
 
-/*----- ALBUM CARD -----*/
+/*----- ALBUM CARD (1) -----*/
 .info-container{
     /*layout*/
     display: flex;
@@ -136,6 +136,78 @@
     /*typography*/
     color: rgba(255, 255, 255, 0.65);
     text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+}
+
+/*----- ALBUM CARD (2) -----*/
+.album-container {
+    /*layout*/
+    display: inline-flex;
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    /*style*/
+    border-radius: 22px;
+    border: 2px solid transparent;
+    background:
+    linear-gradient(#061A12, #061A12) padding-box,
+    conic-gradient(
+      from 180deg,
+      #1DB954,
+      #00F5D4,
+      #1DB954
+    ) border-box;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(2px);
+}
+
+.album-container:hover {
+    /*style*/
+    border-radius: 22px;
+    border-width: 3px;
+    background:
+        linear-gradient(#082317, #082317) padding-box,
+        conic-gradient(
+        from 180deg,
+        #1DB954,
+        #00F5D4,
+        #2D6BFF,
+        #FF4ECD,
+        #1DB954
+        ) border-box;
+    box-shadow: 0 0 18px 0 rgba(29, 185, 84, 0.25), 0 8px 24px 0 rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+}
+
+.album-information-container {
+    /*layout*/
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    gap: 10px;
+}
+
+.album-info-display {
+    /*layout*/
+    display: flex;
+    width: 98px;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.text-info {
+    /*typography*/
+    color: rgba(255, 255, 255, 0.65);
     font-feature-settings: 'liga' off, 'clig' off;
     font-family: Inter;
     font-size: 13px;

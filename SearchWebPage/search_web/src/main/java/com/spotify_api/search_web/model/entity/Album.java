@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spotify_api.search_web.model.enums.AlbumTypes;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -46,6 +47,8 @@ public class Album {
     private boolean loaded = false; // default
     private int releaseYear;
 
+    private AlbumTypes type;
+
     // Constructor
     public Album(){}
 
@@ -80,6 +83,22 @@ public class Album {
 
     public void setArtists(List<Artist> artists) {
         this.artists = artists;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public AlbumTypes getType() {
+        return type;
+    }
+
+    public void setType(AlbumTypes type) {
+        this.type = type;
     }
 
     public int getTotalTracks() {
@@ -155,6 +174,15 @@ public class Album {
     private void stablishYear(String releaseDate){
         if (releaseDate != null && !releaseDate.isBlank()){
             this.releaseYear = Integer.parseInt(releaseDate.substring(0, 4));
+        }
+    }
+
+    @JsonProperty("album_type")
+    private void stablishType(String type){
+        if (type.equals("album")){
+            this.type = AlbumTypes.ALBUM;
+        } else if (type.equals("single")){
+            this.type = AlbumTypes.SINGLE;
         }
     }
 

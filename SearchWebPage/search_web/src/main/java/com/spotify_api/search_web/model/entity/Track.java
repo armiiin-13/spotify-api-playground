@@ -113,7 +113,7 @@ public class Track {
     }
 
     public int getPopularity() {
-        return popularity;
+        return this.popularity;
     }
 
     public void setPopularity(int popularity) {

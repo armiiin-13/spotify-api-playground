@@ -7,6 +7,45 @@
         <link rel="stylesheet" href="/css/display.css">
     </head>
     <body class="page" data-artist-id="{{#artist}}{{id}}{{/artist}}">
+        <script id="tpl-releases" type="x-tmpl-mustache">
+            <div class="display-grid" id="albums-list">
+                [[#albums]]
+                <form action="/album/{{id}}" method="get" class="album-item">
+                    <button class="album-container" type="submit">
+                        <div class="album-info-container">
+                            [[#image]]
+                                <img src="[[url]]" class="image">
+                            [[/image]]
+                            [[^image]]
+                                <img src="/images/image_not_found.jpg" class="image">
+                            [[/image]]
+
+                            <div class="album-info-display">
+                                <div class="album-year-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" viewBox="0 0 22 21" fill="none">
+                                        <path d="M20.625 1.3125H18.2188V0.984375C18.2188 0.440672 17.7571 0 17.1875 0C16.6179 0 16.1562 0.440672 16.1562 0.984375V1.3125H5.84375V0.984375C5.84375 0.440672 5.38209 0 4.8125 0C4.24291 0 3.78125 0.440672 3.78125 0.984375V1.3125H1.375C0.614969 1.3125 0 1.89952 0 2.625V19.6875C0 20.413 0.614969 21 1.375 21H20.625C21.385 21 22 20.413 22 19.6875V2.625C22 1.89952 21.385 1.3125 20.625 1.3125ZM6.1875 17.3906C6.1875 17.5721 6.03384 17.7188 5.84375 17.7188H3.78125C3.59116 17.7188 3.4375 17.5721 3.4375 17.3906V15.75C3.4375 15.5685 3.59116 15.4219 3.78125 15.4219H5.84375C6.03384 15.4219 6.1875 15.5685 6.1875 15.75V17.3906ZM6.1875 13.7812C6.1875 13.9627 6.03384 14.1094 5.84375 14.1094H3.78125C3.59116 14.1094 3.4375 13.9627 3.4375 13.7812V12.1406C3.4375 11.9592 3.59116 11.8125 3.78125 11.8125H5.84375C6.03384 11.8125 6.1875 11.9592 6.1875 12.1406V13.7812ZM6.1875 10.1719C6.1875 10.3533 6.03384 10.5 5.84375 10.5H3.78125C3.59116 10.5 3.4375 10.3533 3.4375 10.1719V8.53125C3.4375 8.3498 3.59116 8.20312 3.78125 8.20312H5.84375C6.03384 8.20312 6.1875 8.3498 6.1875 8.53125V10.1719ZM10.3125 17.3906C10.3125 17.5721 10.1588 17.7188 9.96875 17.7188H7.90625C7.71616 17.7188 7.5625 17.5721 7.5625 17.3906V15.75C7.5625 15.5685 7.71616 15.4219 7.90625 15.4219H9.96875C10.1588 15.4219 10.3125 15.5685 10.3125 15.75V17.3906ZM10.3125 13.7812C10.3125 13.9627 10.1588 14.1094 9.96875 14.1094H7.90625C7.71616 14.1094 7.5625 13.9627 7.5625 13.7812V12.1406C7.5625 11.9592 7.71616 11.8125 7.90625 11.8125H9.96875C10.1588 11.8125 10.3125 11.9592 10.3125 12.1406V13.7812ZM10.3125 10.1719C10.3125 10.3533 10.1588 10.5 9.96875 10.5H7.90625C7.71616 10.5 7.5625 10.3533 7.5625 10.1719V8.53125C7.5625 8.3498 7.71616 8.20312 7.90625 8.20312H9.96875C10.1588 8.20312 10.3125 8.3498 10.3125 8.53125V10.1719ZM14.4375 17.3906C14.4375 17.5721 14.2838 17.7188 14.0938 17.7188H12.0312C11.8412 17.7188 11.6875 17.5721 11.6875 17.3906V15.75C11.6875 15.5685 11.8412 15.4219 12.0312 15.4219H14.0938C14.2838 15.4219 14.4375 15.5685 14.4375 15.75V17.3906ZM14.4375 13.7812C14.4375 13.9627 14.2838 14.1094 14.0938 14.1094H12.0312C11.8412 14.1094 11.6875 13.9627 11.6875 13.7812V12.1406C11.6875 11.9592 11.8412 11.8125 12.0312 11.8125H14.0938C14.2838 11.8125 14.4375 11.9592 14.4375 12.1406V13.7812ZM14.4375 10.1719C14.4375 10.3533 14.2838 10.5 14.0938 10.5H12.0312C11.8412 10.5 11.6875 10.3533 11.6875 10.1719V8.53125C11.6875 8.3498 11.8412 8.20312 12.0312 8.20312H14.0938C14.2838 8.20312 14.4375 8.3498 14.4375 8.53125V10.1719ZM18.5625 13.7812C18.5625 13.9627 18.4088 14.1094 18.2188 14.1094H16.1562C15.9662 14.1094 15.8125 13.9627 15.8125 13.7812V12.1406C15.8125 11.9592 15.9662 11.8125 16.1562 11.8125H18.2188C18.4088 11.8125 18.5625 11.9592 18.5625 12.1406V13.7812ZM18.5625 10.1719C18.5625 10.3533 18.4088 10.5 18.2188 10.5H16.1562C15.9662 10.5 15.8125 10.3533 15.8125 10.1719V8.53125C15.8125 8.3498 15.9662 8.20312 16.1562 8.20312H18.2188C18.4088 8.20312 18.5625 8.3498 18.5625 8.53125V10.1719ZM21.3125 4.92188H0.6875V2.625C0.6875 2.26275 0.9955 1.96875 1.375 1.96875H3.78125V3.28125C3.78125 3.82495 4.24291 4.26562 4.8125 4.26562C5.38209 4.26562 5.84375 3.82495 5.84375 3.28125V1.96875H16.1562V3.28125C16.1562 3.82495 16.6179 4.26562 17.1875 4.26562C17.7571 4.26562 18.2188 3.82495 18.2188 3.28125V1.96875H20.625C21.0045 1.96875 21.3125 2.26275 21.3125 2.625V4.92188Z" fill="#8FB291"/>
+                                    </svg>
+                                    <p class="album-year">[[year]]</p>
+                                </div>
+                                <p class="info-text">Nº Tracks: [[total_tracks]]</p>
+                                [[#explicit]]
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                                            <path opacity="0.5" d="M8.33333 16.6667C4.40496 16.6667 2.44077 16.6667 1.22039 15.4462C-9.93411e-08 14.2259 0 12.2617 0 8.33333C0 4.40496 -9.93411e-08 2.44078 1.22039 1.22039C2.44077 -9.93411e-08 4.40496 0 8.33333 0C12.2617 0 14.2259 -9.93411e-08 15.4462 1.22039C16.6667 2.44078 16.6667 4.40496 16.6667 8.33333C16.6667 12.2617 16.6667 14.2259 15.4462 15.4462C14.2259 16.6667 12.2617 16.6667 8.33333 16.6667Z" fill="#D1D1D1" fill-opacity="0.7"/>
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
+                                            <path d="M0 1.45833C0 0.652917 0.652917 0 1.45833 0H5.625C5.97017 0 6.25 0.279825 6.25 0.625C6.25 0.970175 5.97017 1.25 5.625 1.25H1.45833C1.34327 1.25 1.25 1.34328 1.25 1.45833V4.16667H5.625C5.97017 4.16667 6.25 4.4465 6.25 4.79167C6.25 5.13683 5.97017 5.41667 5.625 5.41667H1.25V8.125C1.25 8.24008 1.34327 8.33333 1.45833 8.33333H5.625C5.97017 8.33333 6.25 8.61317 6.25 8.95833C6.25 9.3035 5.97017 9.58333 5.625 9.58333H1.45833C0.652917 9.58333 0 8.93042 0 8.125V1.45833Z" fill="white" fill-opacity="0.7"/>
+                                        </svg>
+                                    </div>
+                                [[/explicit]]
+                            </div>
+                        </div>
+                        <p class="album-title text-ellipsis">[[name]]</p>
+                    </button>
+                </form>
+                [[/albums]]
+            </div>
+        </script>
         <div class="layout">
             <p class="artist-name">{{#artist}}{{name}}{{/artist}}</p>
 
@@ -17,7 +56,7 @@
 
                 <div class="content-frame">
                     {{#artist}}{{#image}}
-                        <img src={{url}} class="image">
+                        <img src={{url}} class="grand-image">
                     {{/image}}
                     {{^image}}
                         <img src="/images/image_not_found.jpg" class="image">
@@ -25,9 +64,8 @@
                     
                     <div class="right-frame">
                         <div class="horizontal-frame">
-                            <button class="mode-button" data-mode="albums" id="mode-albums" type="button">ALBUMS</button>
-                            <button class="mode-button" data-mode="eps" id="mode-eps" type="button">EPs</button>
-                            <button class="mode-button" data-mode="singles" id="mode-singles" type="button">SINGLES</button>
+                            <button class="album-button active" data-mode="ALBUM" id="mode-albums" type="button"><p class="album-text">ALBUMS</p></button>
+                            <button class="album-button" data-mode="SINGLE" id="mode-eps" type="button"><p class="album-text"></p>SINGLES</button>
                         </div>
 
                         <div class="horizontal-frame">
@@ -36,9 +74,7 @@
                                     <path d="M6 11L1 6L6 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
-                            <div class="horizontal-frame" id="album-pager">
-                                {{> /partials/album-display-2}}
-                            </div>
+                            <div class="album-frame" id="album-pager"></div>
                             <button class="rotative-button" id="rotate-right" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
                                     <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -48,7 +84,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="horizontal-sub-frame">
                 <p class="info-text">most popular tracks<span class="invisible-text">.....</span></p>
                 <div class="content-panel">
@@ -58,5 +93,8 @@
                 </div>
             </div>
         </div>
+        <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+        <script src="/js/rotative.js"></script>
+        <script src="/js/queue.js"></script>
     </body>
 </html>

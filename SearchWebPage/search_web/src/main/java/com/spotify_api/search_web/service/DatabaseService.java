@@ -42,8 +42,6 @@ public class DatabaseService {
             // copy
             managed.setName(artistFromSpotify.getName());
             managed.setImage(artistFromSpotify.getImage());
-            managed.setAlbums(artistFromSpotify.getAlbums());
-            managed.setTopTracks(artistFromSpotify.getTopTracks());
             managed.setLoaded(artistFromSpotify.isLoaded());
             return managed;
         }
@@ -89,15 +87,15 @@ public class DatabaseService {
     }
 
     public void saveAllAlbums(List<Album> albums) {
-        if (albums == null)
-            return;
-        List<Album> copy = new ArrayList<>(albums); // <-- copy
-        for (Album album : copy) {
-            Album managed = entityManager.find(Album.class, album.getId());
-            if (managed == null) {
-                managed = spotify.getAlbumByHref(album.getHref());
+        if (albums != null){
+            List<Album> copy = new ArrayList<>(albums); // copy
+            for (Album album: copy) {
+                Album managed = entityManager.find(Album.class, album.getId());
+                if (managed == null) {
+                    managed = spotify.getAlbumByHref(album.getHref());
+                }
+                saveAlbum(managed);
             }
-            saveAlbum(managed);
         }
     }
 

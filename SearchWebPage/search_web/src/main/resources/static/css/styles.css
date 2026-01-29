@@ -3,7 +3,7 @@
     /*layout*/
     position: relative;
     height: 100vh;
-    overflow: hidden;
+    /*overflow: hidden;*/
 
     /*style*/
     background: url("/images/background.png") lightgray 50% / cover no-repeat;
@@ -101,5 +101,11 @@
 .display-column{
     display: flex;
     flex-direction: column;
+    gap: 10px; 
+}
+
+.display-row {
+    display: flex;
+    flex-direction: row;
     gap: 10px; 
 }

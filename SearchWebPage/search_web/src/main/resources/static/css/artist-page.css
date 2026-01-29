@@ -53,10 +53,23 @@
     padding: 8px;
     flex-direction: column;
     align-items: center;
-    gap: 17px;
+    gap: 5px;
+
+    /*style*/
+    border-radius: 22px;
+    border: 2px solid #1DB954;
+    background: rgba(6, 26, 18, 0.50);
 }
 
 .horizontal-frame {
+    /*layout*/
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+}
+
+.album-frame {
     /*layout*/
     display: flex;
     padding: 10px;
@@ -75,9 +88,6 @@
 }
 
 .info-text {
-    /*layout*/
-    width: 180px;
-    
     /*typography*/
     color: rgba(255, 255, 255, 0.70);
     text-align: center;
@@ -127,6 +137,7 @@
     height: 30px;
     padding-top: 5px;
     padding-right: 5px;
+    cursor: pointer;
 
     /*style*/
     fill: rgba(6, 26, 18, 0.80);
@@ -160,3 +171,44 @@
     filter: drop-shadow(0 0 18px rgba(29, 185, 84, 0.25));
 }
 
+.rotative-button.disable {
+    /*style*/
+    fill: rgba(0, 0, 0, 0.8);
+    border-radius: 999px;
+    border-width: 1px;
+
+    cursor: none;
+}
+
+.album-button {
+    /*layout*/
+    width: 91px;
+    height: 45px;
+    text-align: center;
+    cursor: pointer;
+
+    /*style*/
+    border-radius: 22px;
+    background: #000;
+}
+
+.button-text {
+    /*typography*/
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.album-button.active {
+    background: #123456;
+}
+
+/*----- OTHER ELEMENTS -----*/
+.grand-image{
+    /*layout*/
+    width: 350px;
+    height: 350px;
+}

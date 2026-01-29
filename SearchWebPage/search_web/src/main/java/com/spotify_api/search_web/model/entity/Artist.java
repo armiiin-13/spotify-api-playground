@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -23,15 +22,6 @@ public class Artist {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
-
-    @ManyToMany(mappedBy="artists", cascade=CascadeType.ALL)
-    private List<Album> albums;
-
-    @ManyToMany(cascade=CascadeType.ALL)
-    private List<Album> singles;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Track> topTracks;
 
     // Constructor
     public Artist(){}
@@ -69,36 +59,12 @@ public class Artist {
         this.image = image;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
-    }
-
     public boolean isLoaded() {
         return loaded;
     }
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
-    }
-
-    public List<Track> getTopTracks() {
-        return topTracks;
-    }
-
-    public void setTopTracks(List<Track> topTracks) {
-        this.topTracks = topTracks;
-    }
-
-    public List<Album> getSingles() {
-        return singles;
-    }
-
-    public void setSingles(List<Album> singles) {
-        this.singles = singles;
     }
 
     @Override

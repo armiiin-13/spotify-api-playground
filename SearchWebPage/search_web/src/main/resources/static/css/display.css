@@ -187,7 +187,7 @@
     backdrop-filter: blur(2px);
 }
 
-.album-information-container {
+.album-info-container {
     /*layout*/
     display: flex;
     padding: 5px;

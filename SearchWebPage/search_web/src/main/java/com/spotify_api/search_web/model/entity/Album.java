@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spotify_api.search_web.model.enums.AlbumTypes;
 
@@ -47,6 +48,7 @@ public class Album {
     private boolean loaded = false; // default
     private int releaseYear;
 
+    @JsonIgnore
     private AlbumTypes type;
 
     // Constructor
@@ -179,10 +181,12 @@ public class Album {
 
     @JsonProperty("album_type")
     private void stablishType(String type){
-        if (type.equals("album")){
-            this.type = AlbumTypes.ALBUM;
-        } else if (type.equals("single")){
-            this.type = AlbumTypes.SINGLE;
+        if (type != null){
+            if (type.equals("album")){
+                this.type = AlbumTypes.ALBUM;
+            } else if (type.equals("single")){
+                this.type = AlbumTypes.SINGLE;
+            }
         }
     }
 

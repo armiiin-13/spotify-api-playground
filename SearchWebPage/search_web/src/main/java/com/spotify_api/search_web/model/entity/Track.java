@@ -22,6 +22,7 @@ public class Track {
     private String duration;
 
     private boolean explicit;
+    private int popularity;
 
     @JsonProperty("track_number")
     private int number;
@@ -109,6 +110,14 @@ public class Track {
 
     public void setArtistString(String artistString) {
         this.artistString = artistString;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
     }
 
     @JsonProperty("duration_ms")

@@ -242,6 +242,11 @@
     backdrop-filter: blur(2px);
 }
 
+.card-container-track.small{
+    /*layout*/
+    width: 700px;
+}
+
 .info-container-track{
     /*layout*/
     display: flex;
@@ -253,6 +258,11 @@
     align-items: flex-start;
     gap: 10px;
     flex-shrink: 0;
+}
+
+.info-container-track.small{
+    /*layout*/
+    width: 400px;
 }
 
 .track-title{
@@ -271,6 +281,10 @@
     line-height: normal;
 }
 
+.track-title.small {
+    width: 400px;
+}
+
 .track-info{
     /*layout*/
     width: 600px;
@@ -283,6 +297,10 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+.track-info.small{
+    width: 400px;
 }
 
 .add-button{

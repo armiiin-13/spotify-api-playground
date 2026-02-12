@@ -26,4 +26,7 @@ public class TrackService {
         return this.repository.findById(spotifyId);
     }
 
+    public List<Track> getArtistsTopTen(String artistId){
+        return this.repository.findDistinctTop10ByArtists_IdOrderByPopularityDesc(artistId);
+    }
 }

@@ -173,10 +173,3 @@
     backdrop-filter: blur(7.5px);
 }
 
-/*----- LOGO -----*/
-.logo-container{
-    /*position*/
-    position: relative;
-    top: 15px;
-    left: 1130px
-}

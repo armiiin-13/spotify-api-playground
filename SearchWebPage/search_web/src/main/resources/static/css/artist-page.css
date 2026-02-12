@@ -21,6 +21,8 @@
     font-weight: 700;
     line-height: 22px;
     letter-spacing: -0.43px;
+    margin-top: 5px;
+    margin-bottom: 3px;
 }
 
 .horizontal-upper-frame {
@@ -54,6 +56,8 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    width: 800px;
+    height: 500px;
 
     /*style*/
     border-radius: 22px;
@@ -66,6 +70,14 @@
     display: flex;
     padding: 10px;
     align-items: center;
+    gap: 10px;
+}
+
+.horizontal-frame.albums {
+    height: 600px;
+}
+
+.horizontal-frame.buttons {
     gap: 10px;
 }
 
@@ -171,39 +183,70 @@
     filter: drop-shadow(0 0 18px rgba(29, 185, 84, 0.25));
 }
 
-.rotative-button.disable {
-    /*style*/
-    fill: rgba(0, 0, 0, 0.8);
-    border-radius: 999px;
-    border-width: 1px;
+.rotative-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+}
 
-    cursor: none;
+.rotative-button:disabled svg path {
+    stroke: rgba(255, 255, 255, 0.3);
 }
 
 .album-button {
     /*layout*/
-    width: 91px;
-    height: 45px;
+    width: 200px;
+    height: 50px;
     text-align: center;
     cursor: pointer;
 
     /*style*/
-    border-radius: 22px;
-    background: #000;
+    border-radius: 75px;
+    border: 3px solid rgba(29, 185, 84, 0.30);
+    background: #0B201A;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.12) inset, 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.album-button:hover {
+    background:
+        linear-gradient(#082317, #082317) padding-box,
+        conic-gradient(
+        from 180deg,
+        #1DB954,
+        #00F5D4,
+        #2D6BFF,
+        #FF4ECD,
+        #1DB954
+        ) border-box;
+    filter: drop-shadow(0 0 18px rgba(29, 185, 84, 0.25));
+}
+
+.album-button.active {
+    background:
+        linear-gradient(#082317, #082317) padding-box,
+        conic-gradient(
+        from 180deg,
+        #1DB954,
+        #00F5D4,
+        #2D6BFF,
+        #FF4ECD,
+        #1DB954
+        ) border-box;
+    filter: drop-shadow(0 0 18px rgba(29, 185, 84, 0.25));
 }
 
 .button-text {
     /*typography*/
-    color: #FFF;
+    color: rgba(255, 255, 255, 0.90);
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
     font-family: Inter;
-    font-size: 12px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.album-button.active {
-    background: #123456;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+    margin: 2px;
 }
 
 /*----- OTHER ELEMENTS -----*/

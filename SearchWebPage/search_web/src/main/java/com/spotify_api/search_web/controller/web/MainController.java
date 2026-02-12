@@ -20,11 +20,10 @@ public class MainController {
             model.addAttribute("artists", searchService.getArtistsFromSearch(search));
             model.addAttribute("albums", searchService.getAlbumsFromSearch(search));
             model.addAttribute("tracks", searchService.getTracksFromSearch(search));
+            model.addAttribute("small", false);
         } else {
             model.addAttribute("search", null);
         }
         return "index";
     }
-    
-
 }

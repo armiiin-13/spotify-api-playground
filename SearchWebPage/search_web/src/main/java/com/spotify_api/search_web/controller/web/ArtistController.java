@@ -18,6 +18,8 @@ public class ArtistController {
     public String getSearch(Model model, @PathVariable String id) {
         Artist artist = artistService.getArtist(id);
         model.addAttribute("artist", artist);
+        model.addAttribute("tracks", artistService.getTopTracks(id));
+        model.addAttribute("small", true);
 
         return "artist-page";
     }

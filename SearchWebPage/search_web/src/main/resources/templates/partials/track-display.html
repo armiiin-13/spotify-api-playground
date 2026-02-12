@@ -1,6 +1,6 @@
 <div class="display-column">
     {{#tracks}}
-    <div class="card-container-track">
+    <div class="card-container-track {{#small}}small{{/small}}">
         {{#album}}
             {{#image}}
                 <img src={{url}} class="image">
@@ -13,9 +13,9 @@
             <img src="/images/image_not_found.jpg" class="image">
         {{/album}}
 
-        <div class="info-container-track">
-            <p class="track-title text-ellipsis">{{number}}. {{name}}</p>
-            <p class="track-info text-ellipsis">
+        <div class="info-container-track {{#small}}small{{/small}}">
+            <p class="track-title text-ellipsis {{#small}}small{{/small}}">{{number}}. {{name}}</p>
+            <p class="track-info text-ellipsis {{#small}}small{{/small}}">
                 {{artistString}} - {{#album}}{{name}}{{/album}}{{^album}}Unknown{{/album}}
             </p>
         </div>

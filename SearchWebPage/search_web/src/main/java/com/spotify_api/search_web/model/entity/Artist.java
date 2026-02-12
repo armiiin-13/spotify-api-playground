@@ -23,6 +23,9 @@ public class Artist {
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image grandImage;
+
     // Constructor
     public Artist(){}
 
@@ -67,6 +70,14 @@ public class Artist {
         this.loaded = loaded;
     }
 
+    public Image getGrandImage() {
+        return grandImage;
+    }
+
+    public void setGrandImage(Image grandImage) {
+        this.grandImage = grandImage;
+    }
+
     @Override
     public boolean equals(Object o){
         if (o == null){
@@ -83,6 +94,7 @@ public class Artist {
     private void stablishImage(List<Image> images) {
         if (images != null && !images.isEmpty()) {
             this.image = images.getLast();
+            this.grandImage = images.getFirst();
         }
     }
 }

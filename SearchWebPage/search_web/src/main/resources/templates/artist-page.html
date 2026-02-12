@@ -55,20 +55,21 @@
                 </div>
 
                 <div class="content-frame">
-                    {{#artist}}{{#image}}
+                    {{#artist}}{{#grandImage}}
                         <img src={{url}} class="grand-image">
-                    {{/image}}
-                    {{^image}}
+                    {{/grandImage}}
+                    {{^grandImage}}
                         <img src="/images/image_not_found.jpg" class="image">
-                    {{/image}}{{/artist}}
+                    {{/grandImage}}{{/artist}}
                     
                     <div class="right-frame">
-                        <div class="horizontal-frame">
-                            <button class="album-button active" data-mode="ALBUM" id="mode-albums" type="button"><p class="album-text">ALBUMS</p></button>
-                            <button class="album-button" data-mode="SINGLE" id="mode-eps" type="button"><p class="album-text"></p>SINGLES</button>
+                        <div class="horizontal-frame buttons">
+                            <button class="album-button active" data-mode="ALBUM" id="mode-albums" type="button"><p class="button-text">ALBUMS</p></button>
+                            <button class="album-button" data-mode="SINGLE" id="mode-eps" type="button"><p class="button-text">SINGLES</p></button>
+                            <button class="album-button" data-mode="TRACKS" id="mode-tracks" type="button"><p class="button-text">POPULAR TRACKS</p></button>
                         </div>
 
-                        <div class="horizontal-frame">
+                        <div class="horizontal-frame albums">
                             <button class="rotative-button" id="rotate-left" type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
                                     <path d="M6 11L1 6L6 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,21 +81,18 @@
                                     <path d="M1 1L6 6L1 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
+                            <div id="track-div" class="display-wrapped simple small hidden">
+                                {{> /partials/track-display}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="horizontal-sub-frame">
-                <p class="info-text">most popular tracks<span class="invisible-text">.....</span></p>
-                <div class="content-panel">
-                    <div class="display-wrapped simple" id="panel-track" hidden>
-                        {{> /partials/track-display}}
-                    </div>
-                </div>
-            </div>
+            <footer class="logo-container-artist-page">
+                <img src="../images/logo_Spotify.png">
+            </footer>
         </div>
         <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
         <script src="/js/rotative.js"></script>
-        <script src="/js/queue.js"></script>
     </body>
 </html>

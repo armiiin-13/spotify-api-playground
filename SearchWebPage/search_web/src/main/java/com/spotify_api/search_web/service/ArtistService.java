@@ -11,6 +11,7 @@ import com.spotify_api.search_web.model.apiResponse.ItemsPage;
 import com.spotify_api.search_web.model.apiResponse.TracksResponse;
 import com.spotify_api.search_web.model.entity.Album;
 import com.spotify_api.search_web.model.entity.Artist;
+import com.spotify_api.search_web.model.entity.Track;
 import com.spotify_api.search_web.model.exception.ArtistNotFoundException;
 import com.spotify_api.search_web.repository.ArtistRepository;
 
@@ -18,6 +19,9 @@ import com.spotify_api.search_web.repository.ArtistRepository;
 public class ArtistService {
     @Autowired
     private ArtistRepository repository;
+
+    @Autowired
+    private TrackService trackService;
 
     @Autowired
     private SpotifyService spotify;
@@ -70,5 +74,9 @@ public class ArtistService {
         artist.setLoaded(true);
         this.database.modifyArtist(artist);
         return artist;
+    }
+
+    public List<Track> getTopTracks(String id) {
+        return this.trackService.getArtistsTopTen(id);
     }
 }

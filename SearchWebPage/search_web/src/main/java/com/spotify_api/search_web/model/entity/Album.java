@@ -38,6 +38,11 @@ public class Album {
 
     private String artistString;
 
+    private boolean explicit;
+
+    @JsonIgnore
+    private boolean explicitLoaded = false; //default
+
     @OneToMany(mappedBy="album", cascade=CascadeType.ALL)
     private List<Track> trackList;
 
@@ -149,6 +154,32 @@ public class Album {
 
     public void setYear(int year) {
         this.releaseYear = year;
+    }
+
+    public boolean isExplicit() {
+        this.setExplicit();
+        return explicit;
+    }
+
+    public void setExplicit() {
+        if (!explicitLoaded){
+            if (this.trackList != null && !this.trackList.isEmpty()){
+                Iterator<Track> it = this.trackList.iterator();
+                boolean stop = false;
+                while (it.hasNext() && !stop){
+                    Track actual = it.next();
+                    if (actual.isExplicit()){
+                        stop = true;
+                        this.explicit = true;
+                    }
+                }
+                if (this.totalTracks == this.trackList.size()){
+                    this.explicitLoaded = true;
+                }
+            } else {
+                this.explicitLoaded = false;
+            }
+        }
     }
 
     @JsonProperty("images")

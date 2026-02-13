@@ -91,6 +91,10 @@
 }
 
 .info-text {
+    /*layout*/
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
     /*typography*/
     color: rgba(255, 255, 255, 0.70);
     text-align: center;

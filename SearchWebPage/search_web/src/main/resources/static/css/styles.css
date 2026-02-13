@@ -9,6 +9,18 @@
     background: url("/images/background.png") lightgray 50% / cover no-repeat;
 }
 
+/*----- MAIN LAYOUT -----*/
+.layout {
+    /*layout*/
+    display: flex;
+    width: 1440px;
+    height: 1021px;
+    padding: 70px 50px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 /*----- MODE BUTTONS -----*/
 .mode-button{
     /*layout*/

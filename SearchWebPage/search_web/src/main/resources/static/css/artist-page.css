@@ -1,14 +1,5 @@
 /*----- DISPLAY -----*/
-.layout {
-    /*layout*/
-    display: flex;
-    width: 1440px;
-    height: 1021px;
-    padding: 70px 50px;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
+
 
 .artist-name {
     /*typography*/

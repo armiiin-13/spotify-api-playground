@@ -21,6 +21,12 @@
     gap: 10px;
 }
 
+.layout.modified {
+    /*layout*/
+    padding-top: 50px;
+    gap: 2px;
+}
+
 /*----- MODE BUTTONS -----*/
 .mode-button{
     /*layout*/
@@ -103,6 +109,10 @@
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 60px;
+}
+
+.display-wrapped.compact {
+    padding-top: 0px;
 }
 
 .hidden{

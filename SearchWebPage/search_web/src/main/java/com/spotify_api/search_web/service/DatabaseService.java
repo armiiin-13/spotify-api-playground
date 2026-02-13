@@ -113,13 +113,6 @@ public class DatabaseService {
         return entityManager.merge(managed);
     }
 
-    public Track saveTrackSimplified(Track track) {
-        saveAllArtists(track.getArtists());
-
-        Track managed = getManagedTrack(track.getId(), track);
-        return entityManager.merge(managed);
-    }
-
     private Track getManagedTrack(String trackId, Track trackFromSpotify) {
         Track managed = entityManager.find(Track.class, trackId);
         if (managed != null) {
@@ -143,20 +136,6 @@ public class DatabaseService {
                 saveTrack(track);
             } else {
                 saveTrack(managed);
-            }
-        }
-    }
-
-    public void saveAllTracksSimplified(List<Track> tracks) {
-        if (tracks == null)
-            return;
-        List<Track> copy = new ArrayList<>(tracks); // <-- copy
-        for (Track track : copy) {
-            Track managed = entityManager.find(Track.class, track.getId());
-            if (managed == null) {
-                saveTrackSimplified(track);
-            } else {
-                saveTrackSimplified(managed);
             }
         }
     }

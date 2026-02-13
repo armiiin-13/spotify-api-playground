@@ -49,7 +49,7 @@ public class AlbumService {
         }
         Album album = op.get();
 
-        // If the album is not loaded, it should be (loaded = does not have associated albums)
+        // If the album is not loaded, it should be (loaded = does not have a complete tracklist)
         if (!album.isLoaded()){
             return loadAlbum(album);
         } // else
@@ -59,7 +59,10 @@ public class AlbumService {
     private Album loadAlbum(Album album){
         // get tracks from album
         ItemsPage<Track> tracks = this.spotify.getAlbumsTracks(album.getId());
-        this.database.saveAllTracksSimplified(tracks.getItems());
+        for (Track track: tracks.getItems()) {
+            track.setAlbum(album);
+        }
+        this.database.saveAllTracks(tracks.getItems());
         album.setTrackList(tracks.getItems());
         
         album.setLoaded(true);

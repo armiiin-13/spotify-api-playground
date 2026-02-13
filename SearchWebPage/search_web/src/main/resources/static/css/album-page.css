@@ -1,0 +1,100 @@
+/*--------- LAYOUT FRAMES --------- */
+.horizontal-frame {
+    /*layout*/
+    display: flex;
+    width: 1188px;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.mode-frame {
+    /*layout*/
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.content-frame {
+    /*layout*/
+    display: flex;
+    padding: 0px 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.content-panel{
+    /*layout*/
+    display: flex;
+    width: 970px;
+    height: 350px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    /*position*/
+    top: 60px;
+    left: 260px;
+
+    /*style*/
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(16, 55, 40, 0.70);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(7.5px);
+}   
+
+.year-frame {
+    /*layout*/
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 14.175px;
+}
+
+/*--------- TEXT STYLE --------- */
+.album-name {
+    /*layout*/
+    width: 700px;
+    margin: 0px;
+
+    /*typography*/
+    color: #FFF;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; 
+    letter-spacing: -0.43px;
+}
+
+.subtext {
+    /*layout*/
+    margin: 0px;
+
+    /*typography*/
+    color: rgba(255, 255, 255, 0.75);
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.subtext.year {
+    font-size: 20px;
+}
+
+/*--------- IMAGE STYLE --------- */
+.album-image {
+    /*layout*/
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+}

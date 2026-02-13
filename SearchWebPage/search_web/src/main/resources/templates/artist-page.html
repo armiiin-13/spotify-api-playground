@@ -8,7 +8,7 @@
     </head>
     <body class="page" data-artist-id="{{#artist}}{{id}}{{/artist}}">
         <script id="tpl-releases" type="x-tmpl-mustache">
-            <div class="display-grid" id="albums-list">
+            <div class="display-grid compact" id="albums-list">
                 [[#albums]]
                 <form action="/album/[[id]]" method="get" class="album-item">
                     <button class="album-container" type="submit">

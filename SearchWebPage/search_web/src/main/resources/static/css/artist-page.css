@@ -66,6 +66,7 @@
 
 .horizontal-frame.albums {
     height: 600px;
+    padding-top: 2px;
 }
 
 .horizontal-frame.buttons {
@@ -94,7 +95,7 @@
     /*layout*/
     margin-top: 3px;
     margin-bottom: 3px;
-    
+
     /*typography*/
     color: rgba(255, 255, 255, 0.70);
     text-align: center;

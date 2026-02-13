@@ -155,6 +155,7 @@
     width: 300px;
     height: 185px;
     gap: 10px;
+    cursor: pointer;
 
     /*style*/
     border-radius: 22px;

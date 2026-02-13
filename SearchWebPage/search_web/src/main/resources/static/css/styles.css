@@ -125,6 +125,10 @@
     gap: 40px;
 }
 
+.display-grid.compact {
+    gap: 30px;
+}
+
 .display-column{
     display: flex;
     flex-direction: column;

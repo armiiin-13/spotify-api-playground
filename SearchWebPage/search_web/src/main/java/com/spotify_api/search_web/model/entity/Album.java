@@ -11,6 +11,7 @@ import com.spotify_api.search_web.model.enums.AlbumTypes;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -36,6 +37,7 @@ public class Album {
     @ManyToMany
     private List<Artist> artists;
 
+    @Lob // could be really long
     private String artistString;
 
     private boolean explicit;

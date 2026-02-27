@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.spotify_api.search_web.model.entity.Album;
 import com.spotify_api.search_web.model.entity.Artist;
 import com.spotify_api.search_web.model.entity.Track;
-import com.spotify_api.search_web.repository.ImageRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -21,8 +20,6 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class DatabaseService {
-    @Autowired
-    private ImageRepository imageRepository;
 
     @Autowired
     private SpotifyService spotify;

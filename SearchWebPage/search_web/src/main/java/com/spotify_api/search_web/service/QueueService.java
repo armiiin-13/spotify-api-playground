@@ -33,6 +33,7 @@ public class QueueService {
             String spotifyId = this.queue.dequeue();
             Optional<Track> op = trackService.findTrack(spotifyId);
             if (op.isPresent()){
+                this.nowPlaying = op.get();
                 return op.get();
             } // else
             throw new TrackNotFoundException();
@@ -40,8 +41,7 @@ public class QueueService {
     
     }
 
-    public Object nowPlaying() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'nowPlaying'");
+    public Track nowPlaying() {
+        return this.nowPlaying;
     }
 }

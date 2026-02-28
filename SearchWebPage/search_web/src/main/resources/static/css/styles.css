@@ -27,6 +27,17 @@
     gap: 2px;
 }
 
+.layout.row {
+    /*layout*/
+    display: flex;
+    flex-direction: row;
+    width: 1440px;
+    height: 1021px;
+    padding: 50px 100px;
+    align-items: flex-start;
+    gap: 15px;
+}
+
 /*----- MODE BUTTONS -----*/
 .mode-button{
     /*layout*/
@@ -152,4 +163,16 @@
 .logo-container-artist-page{
     margin-top: -55px;
     margin-left: 1020px;
+}
+
+.logo-container-player {
+    /*layout*/
+    display: flex;
+    padding: 550px 0 0 70px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 241px;
+    height: 82px;
+    aspect-ratio: 241/82;
 }

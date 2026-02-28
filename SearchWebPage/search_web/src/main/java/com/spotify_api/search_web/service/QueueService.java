@@ -28,6 +28,7 @@ public class QueueService {
 
     public Track dequeue(){
         if (this.queue.isEmpty()){
+            this.nowPlaying = null;
             return null;
         } else {
             String spotifyId = this.queue.dequeue();

@@ -16,7 +16,7 @@ public class QueueController {
     @GetMapping("/queue")
     public String showPlayer(Model model) {
         if (!model.containsAttribute("track")) {
-            model.addAttribute("track", null);
+            model.addAttribute("track", queue.nowPlaying());
         }
         return "player";
     } 

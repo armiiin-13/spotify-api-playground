@@ -123,8 +123,10 @@ public class Track {
     @JsonProperty("duration_ms")
     public void setDurationMS(int durationMS) {
         if (durationMS != 0) {
-            float minutes = durationMS / 60000f;
-            this.duration = String.format("%.2f", minutes);
+            long totalSeconds = durationMS / 1000;
+            long mins = totalSeconds / 60;
+            long secs = totalSeconds % 60;
+            this.duration = String.format("%d:%02d", mins, secs);
         }
     }
 

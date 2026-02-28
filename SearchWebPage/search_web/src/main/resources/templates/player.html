@@ -2,14 +2,55 @@
 <html>
     <head>
         <title>Spotify Queue</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/player.css">
     </head>
-    <body>
-        <p><strong>Now Playing</strong></p>
-        {{#track}}
-                <p>{{name}} ({{duration}} minutes)</p>
-        {{/track}}
-        <form action="/queue/next" method="get">
-            <button type="submit">Next</button>
-        </form>
+    <body class="page">
+        <div class="layout row">
+            <div class="mode-frame">
+                {{> partials/mode-buttons}}
+            </div>
+
+            <div class="player-layout">
+                {{#track}}
+                    <image src="{{#album}}{{#image}}{{url}}{{/image}}{{/album}}" class="image">
+                    <p class="song-name ellipsis">{{name}}</p>
+                    <p class="song-info ellipsis">
+                        {{artistString}} - 
+                        {{#album}}{{name}}{{/album}}
+                    </p>
+                {{/track}}
+                {{^track}}
+                    <img src="/images/image_not_found.jpg" class="image">
+                    <p class="song-name ellipsis">--</p>
+                    <p class="song-info ellipsis">-- - --</p>
+                {{/track}}
+
+                <div class="buttons-frame">
+                    {{#track}}
+                        <p class="duration">{{duration}}</p>
+                    {{/track}}
+                    {{^track}}
+                        <p class="duration">XX:XX</p>
+                    {{/track}}
+
+                    <div id="play-pause" class="button">
+                    </div>
+
+                    <form action="/queue/next" method="get">
+                        <button type="submit" class="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40" fill="none">
+                                <path d="M21 14.2324L21.6406 14.6807L28.0723 19.1807H28.0742C28.2063 19.2728 28.3142 19.3963 28.3887 19.5391C28.463 19.6817 28.5019 19.8402 28.502 20.001C28.502 20.162 28.4631 20.3211 28.3887 20.4639C28.3142 20.6065 28.2062 20.7292 28.0742 20.8213L28.0723 20.8223L21.6406 25.3223L21 25.7695V35.582L23.3604 33.9297L41.5 21.2295L43.2559 20.001L41.5 18.7725L23.3604 6.07227L21 4.41992V14.2324ZM19 2.5C19 2.31724 19.0498 2.13775 19.1445 1.98145C19.2393 1.82503 19.3759 1.69783 19.5381 1.61328C19.7001 1.52887 19.8821 1.49018 20.0645 1.50195C20.2014 1.51084 20.3348 1.54818 20.4561 1.61035L20.5732 1.68066L45.5723 19.1797L45.5742 19.1807C45.7063 19.2728 45.8142 19.3963 45.8887 19.5391C45.9629 19.6817 46.0019 19.8402 46.002 20.001C46.002 20.162 45.9631 20.3211 45.8887 20.4639C45.8142 20.6065 45.7062 20.7292 45.5742 20.8213L45.5723 20.8223L20.5732 38.3213C20.4233 38.4261 20.247 38.4882 20.0645 38.5C19.8821 38.5118 19.7002 38.4731 19.5381 38.3887C19.3759 38.3041 19.2393 38.1769 19.1445 38.0205C19.0498 37.8642 19 37.6847 19 37.502V27.1699L16.6396 28.8223L3.07324 38.3213C2.92333 38.4261 2.74699 38.4882 2.56445 38.5C2.38208 38.5118 2.20016 38.4731 2.03809 38.3887C1.87589 38.3041 1.73935 38.1769 1.64453 38.0205C1.54981 37.8642 1.49995 37.6847 1.5 37.502V2.5C1.5 2.31723 1.5498 2.13774 1.64453 1.98145C1.73934 1.82503 1.87589 1.69783 2.03809 1.61328C2.20013 1.52887 2.38212 1.49018 2.56445 1.50195C2.70142 1.51084 2.83477 1.54818 2.95605 1.61035L3.07324 1.68066L16.6396 11.1797L19 12.833V2.5Z" fill="#8FB291" stroke="#335948" stroke-width="3"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="logo-container-player">
+                <img src="images/logo_Spotify.png">
+            </div>
+        </div>
+        <script src="/js/player.js"></script>
     </body>
 </html>

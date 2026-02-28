@@ -1,5 +1,9 @@
 package com.spotify_api.search_web.service;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,13 +22,22 @@ public class TokenService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String CLIENT_ID = "f2299a8d1b7d40eabd0213156819f1d3";
-    private static final String CLIENT_SECRET = "f0cd8ed55492490799de26d1d03087fd";
+    private String clientId;
+    private String clientSecret;
     private String accessToken;
     private String tokenType;
 
     private long expiresAt = 0; //timestamp
     private static final String GET_TOKEN_URL = "https://accounts.spotify.com/api/token"; 
+
+    public TokenService(){
+        try (BufferedReader br = new BufferedReader(new FileReader("Spotify_API\\token.txt"))) {
+            clientId = br.readLine();
+            clientSecret = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public String getAccessToken(){
         if (this.accessToken == null || this.isExpired()){
@@ -48,7 +61,7 @@ public class TokenService {
         // headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setBasicAuth(CLIENT_ID, CLIENT_SECRET);
+        headers.setBasicAuth(clientId, clientSecret);
 
         // body
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();

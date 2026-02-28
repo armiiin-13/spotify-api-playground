@@ -1,8 +1,9 @@
 import requests
 
 # API Credentials
-client_ID = 'f2299a8d1b7d40eabd0213156819f1d3'
-client_secret = 'f0cd8ed55492490799de26d1d03087fd'
+with open("Spotify_API/token.txt", "r", encoding="utf-8") as f:
+    client_ID = f.readline().rstrip("\n")
+    client_secret = f.readline().rstrip("\n")
 
 # Using the requests library, it sends the POST request well formed with the IDs as the parameters
 url = 'https://accounts.spotify.com/api/token' # the endpoint

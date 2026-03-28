@@ -1,7 +1,7 @@
 import requests
 
 # API Credentials
-with open("Spotify_API/token.txt", "r", encoding="utf-8") as f:
+with open("token.txt", "r", encoding="utf-8") as f:
     client_ID = f.readline().rstrip("\n")
     client_secret = f.readline().rstrip("\n")
 

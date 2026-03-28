@@ -31,7 +31,7 @@ public class TokenService {
     private static final String GET_TOKEN_URL = "https://accounts.spotify.com/api/token"; 
 
     public TokenService(){
-        try (BufferedReader br = new BufferedReader(new FileReader("Spotify_API\\token.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("token.txt"))) {
             clientId = br.readLine();
             clientSecret = br.readLine();
         } catch (IOException e) {

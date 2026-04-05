@@ -13,7 +13,7 @@
 
             <div class="player-layout">
                 {{#track}}
-                    <image src="{{#album}}{{#image}}{{url}}{{/image}}{{/album}}" class="image">
+                    <img src="{{#album}}{{#image}}{{url}}{{/image}}{{/album}}" class="image">
                     <p class="song-name ellipsis">{{name}}</p>
                     <p class="song-info ellipsis">
                         {{artistString}} - 
@@ -51,6 +51,7 @@
                 <img src="images/logo_Spotify.png">
             </div>
         </div>
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
         <script src="/js/player.js"></script>
     </body>
 </html>

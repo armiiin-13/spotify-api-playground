@@ -63,6 +63,7 @@ const TRACK_URI_BASE = 'spotify:track:';
 // Establish Playback SDK
 window.onSpotifyWebPlaybackSDKReady = async () => {
     try {
+        await getSpotifyUserToken();
         spotifyPlayer = new Spotify.Player({
             name: 'Web reproductor',
             getOAuthToken: async cb => {
@@ -75,66 +76,77 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
             },
             volume: 0.5
         });
+
+        // State Changed Listener
+        spotifyPlayer.addListener('player_state_changed', state => {
+            if (!state) return;
+
+            const currentTrack = state.track_window.current_track;
+            const currentTrackId = currentTrack ? currentTrack.id : null;
+            const currentPosition = state.position;
+            const currentPaused = state.paused;
+
+            if (lastTrackId !== currentTrackId) {
+                trackEndedHandled = false;
+            }
+
+            const trackReallyEnded =
+                !previousPaused &&
+                previousPosition > 0 &&
+                currentPaused &&
+                currentPosition === 0 &&
+                !trackEndedHandled;
+
+            if (trackReallyEnded) {
+                trackEndedHandled = true;
+                onTrackEnded();
+            }
+
+            previousPosition = currentPosition;
+            previousPaused = currentPaused;
+            lastTrackId = currentTrackId;
+        });
+
+        // Ready Listener
+        spotifyPlayer.addListener('ready', async ({ device_id }) => {
+            spotifyDeviceId = device_id;
+
+            const playButton = document.getElementById('play-pause');
+            if (!playButton || playButtonBound) return;
+
+            playButtonBound = true;
+
+            playButton.addEventListener('click', async () => {
+                try {
+                    const token = await getSpotifyUserToken();
+                    await spotifyPlayer.activateElement();
+                    const state = await spotifyPlayer.getCurrentState();
+
+                    if (state === null) {
+                        await transferPlayback(spotifyDeviceId, token);
+                        const trackInput = document.getElementById("track-id");
+                        const id = trackInput ? trackInput.value : "";
+                        
+                        if (id !== "") {
+                            await playTrack(spotifyDeviceId, token, TRACK_URI_BASE + id);
+                        }
+                        return;
+                    }
+                    await spotifyPlayer.togglePlay();
+                } catch (e) {
+                    console.error('Error on clicking play/pause:', e);
+                }
+            });
+            setTimeout(() => {
+                playButton.click();
+            }, 500);
+        });
+
+        // Connect the player
+        await spotifyPlayer.connect();
+
     } catch (e) {
         console.error('Error initializing spotify-player.js:', e);
     }
 }
 
-// State Changed Listener
-spotifyPlayer.addListener('player_state_changed', state => {
-    if (!state) return;
-    const currentTrack = state.track_window.current_track;
-    const currentTrackId = currentTrack ? currentTrack.id : null;
-    const currentPosition = state.position;
-    const currentPaused = state.paused;
-
-    if (lastTrackId !== currentTrackId) {
-        trackEndedHandled = false;
-    }
-
-    const trackReallyEnded =
-        !previousPaused &&
-        previousPosition > 0 &&
-        currentPaused &&
-        currentPosition === 0 &&
-        !trackEndedHandled;
-
-    if (trackReallyEnded) {
-        trackEndedHandled = true;
-        onTrackEnded();
-    }
-
-    previousPosition = currentPosition;
-    previousPaused = currentPaused;
-    lastTrackId = currentTrackId;
-});
-
-// Ready Listener
-spotifyPlayer.addListener('ready', async ({ device_id }) => {
-    spotifyDeviceId = device_id;
-    const playButton = document.getElementById('play-pause');
-    if (!playButton || playButtonBound) return;
-    playButtonBound = true;
-    playButton.addEventListener('click', async () => {
-        try {
-            const token = await getSpotifyUserToken();
-            await spotifyPlayer.activateElement();
-            const state = await spotifyPlayer.getCurrentState();
-            if (state === null) {
-                await transferPlayback(spotifyDeviceId, token);
-                const trackInput = document.getElementById("track-id");
-                const id = trackInput ? trackInput.value : "";
-                if (id !== "") {
-                    await playTrack(spotifyDeviceId, token, TRACK_URI_BASE + id);
-                }
-                return;
-            }
-            await spotifyPlayer.togglePlay();
-        } catch (e) {
-            console.error('Error on clicking play/pause:', e);
-        }
-    });
-    setTimeout(() => {
-        playButton.click();
-    }, 500);
-});

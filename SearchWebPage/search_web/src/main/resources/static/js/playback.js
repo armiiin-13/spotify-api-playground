@@ -67,8 +67,7 @@ const TRACK_URI_BASE = 'spotify:track:';
 
 window.onSpotifyWebPlaybackSDKReady = async () => {
     try {
-        const firstToken = await getSpotifyUserToken();
-
+        await getSpotifyUserToken();
         spotifyPlayer = new Spotify.Player({
             name: 'Web reproductor',
             getOAuthToken: async cb => {
@@ -82,10 +81,9 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
             volume: 0.5
         });
 
+        // State Changed Listener
         spotifyPlayer.addListener('player_state_changed', state => {
             if (!state) return;
-
-            console.log('player_state_changed:', state);
 
             const currentTrack = state.track_window.current_track;
             const currentTrackId = currentTrack ? currentTrack.id : null;
@@ -113,6 +111,7 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
             lastTrackId = currentTrackId;
         });
 
+        // Ready Listener
         spotifyPlayer.addListener('ready', async ({ device_id }) => {
             spotifyDeviceId = device_id;
 
@@ -131,34 +130,27 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
                         await transferPlayback(spotifyDeviceId, token);
                         const trackInput = document.getElementById("track-id");
                         const id = trackInput ? trackInput.value : "";
-
+                        
                         if (id !== "") {
                             await playTrack(spotifyDeviceId, token, TRACK_URI_BASE + id);
-                        } else {
-                            console.warn("No track id found");
                         }
                         return;
                     }
-
                     await spotifyPlayer.togglePlay();
                 } catch (e) {
                     console.error('Error on clicking play/pause:', e);
                 }
             });
-
             setTimeout(() => {
                 playButton.click();
             }, 500);
         });
 
-        spotifyPlayer.addListener('not_ready', ({ device_id }) => {
-            console.warn('Device not ready:', device_id);
-        });
-
-        const connected = await spotifyPlayer.connect();
-        console.log('SDK connected:', connected, 'token initial ok:', !!firstToken);
+        // Connect the player
+        await spotifyPlayer.connect();
 
     } catch (e) {
         console.error('Error initializing spotify-player.js:', e);
     }
-};
+}
+

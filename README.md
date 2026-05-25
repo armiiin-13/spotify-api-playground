@@ -19,6 +19,8 @@ To create an app you need to specify the following information:
 - App's description
 - Redirect URI: where users can be redirected after authentication success or failure
 - Specify all the Spotify API you are going to use in the project
+
+> [!TIP]
 > If you do not need to put a redirect URI use: http://127.0.0.1:3000
 
 > [!WARNING] 

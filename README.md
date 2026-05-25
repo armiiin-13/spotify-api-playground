@@ -51,12 +51,12 @@ Before starting to develop a functional web application that uses the Spotify AP
 
 Additionally, since the goal is to integrate these external API calls into a Spring (Java) application, further research was conducted on how to accomplish this, as it is a topic not covered within the Computer Engineering degree curriculum. All the notes and materials gathered can be found in the `External_API_Requests.ipynb` file.
 
-> [!Note] The notes only cover the usage of the `RestTemplate` class in Java, as it is one of the most commonly used tools in this programming language and the one that will be used in the web application to be developed later. Therefore, other libraries have not been covered yet (TBD).
+> [!NOTE] The notes only cover the usage of the `RestTemplate` class in Java, as it is one of the most commonly used tools in this programming language and the one that will be used in the web application to be developed later. Therefore, other libraries have not been covered yet (TBD).
 
 
 ## 🎧 QueuePlayer Application
 The QueuePlayer Application (also known as the SpotiApp) is a small music streaming platform similar to Spotify or Apple Music. The app has two basic features: searching for artists, albums, and songs, and playing the songs added to the queue.
-> [!Warning] If you try to test the app by forking the repository, it will not work, as all tokens are stored locally. To see how the app works, you can watch the following YouTube video by clicking this [link](https://youtu.be/nG84TyIVS8U).
+> [!WARNING] If you try to test the app by forking the repository, it will not work, as all tokens are stored locally. To see how the app works, you can watch the following YouTube video by clicking this [link](https://youtu.be/nG84TyIVS8U).
 
 The following section presents the two initial features, together with their corresponding screens.
 
@@ -81,7 +81,7 @@ Under the Tracks tab, some of the artist’s songs will be shown (these songs ca
 
 ![Search Page Searching Tracks](src/README_images/search_tracks.png)
 
-> Note: The information returned is not always 100% precise, as this depends on how Spotify processes and ranks search query results.
+> [!NOTE]The information returned is not always 100% precise, as this depends on how Spotify processes and ranks search query results.
 
 When the user clicks on an artist, they are taken to the artist’s dedicated page, which contains information about their albums, singles, and popular tracks. This follows a process similar to the search functionality: once the artist’s Spotify ID is obtained, a request is sent to the corresponding Spotify API endpoint to retrieve all this information.
 

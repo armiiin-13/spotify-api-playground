@@ -21,7 +21,8 @@ To create an app you need to specify the following information:
 - Specify all the Spotify API you are going to use in the project
 > If you do not need to put a redirect URI use: http://127.0.0.1:3000
 
->[!Warning] The Spotify Developer's Web do not let the URI to be http://localhost:XXXX. In order to specify your local URI use the http://127.0.0.1
+> [!WARNING] 
+> The Spotify Developer's Web do not let the URI to be http://localhost:XXXX. In order to specify your local URI use the http://127.0.0.1
 
 ### 🔐 1.2 Request an Access Token
 When the app is created, in its information you will see two IDs: _client ID_ and _Client Secret_, which will be used when authenticating credentials (requesting an access token).
